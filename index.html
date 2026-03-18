@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vlad Panaitescu — Graphic Designer</title>
+  <meta name="description" content="Portofoliu de design grafic — branding, UI/UX, ilustrație și motion graphics." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Anton&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" data-i18n="nav.about">DESPRE MINE</a></li>
+        <li><a href="#brands" data-i18n="nav.brands">CLIENȚI</a></li>
+      </ul>
+      <div class="nav-center-logo">
+        <a href="#hero" class="nav-logo">VP</a>
+      </div>
+      <ul class="nav-links nav-links-right">
+        <li><a href="#projects" data-i18n="nav.projects">PROIECTE</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">CONTACT</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn" id="langBtn" aria-label="Schimbă limba">
+            <span id="currentLangFlag">🇷🇴</span>
+            <span id="currentLangCode">RO</span>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-option" data-lang="ro"><span>🇷🇴</span> Română</button>
+            <button class="lang-option" data-lang="en"><span>🇬🇧</span> English</button>
+            <button class="lang-option" data-lang="de"><span>🇩🇪</span> Deutsch</button>
+            <button class="lang-option" data-lang="it"><span>🇮🇹</span> Italiano</button>
+            <button class="lang-option" data-lang="fr"><span>🇫🇷</span> Français</button>
+          </div>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <h1 class="hero-mega-text">
+        <span data-i18n="hero.greeting">SALUT, SUNT</span>
+      </h1>
+      <div class="hero-avatar-zone">
+        <div class="avatar-container" id="avatarContainer">
+          <div class="avatar-3d" id="avatar3d">
+            <img src="/assets/avatar.png" alt="Vlad Panaitescu 3D Avatar" class="avatar-img" id="avatarImg" />
+          </div>
+        </div>
+      </div>
+      <h1 class="hero-mega-name">VLAD<span class="accent-dot">.</span></h1>
+      <p class="hero-description" data-i18n="hero.description">Un Graphic Designer pasionat de crearea unor identități vizuale memorabile și experiențe digitale care inspiră 🎨</p>
+      <a href="#contact" class="btn-contact" data-i18n="hero.cta">CONTACTEAZĂ-MĂ</a>
+    </div>
+  </section>
+
+  <!-- ===== BRANDS (scroll-driven) ===== -->
+  <section class="brands-scroll" id="brands">
+    <div class="scroll-row brands-row" id="brandsRow">
+      <!-- Brands injected via JS -->
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ROWS (scroll-driven) ===== -->
+  <section class="gallery-scroll" id="gallery">
+    <div class="scroll-row gallery-row-1" id="galleryRow1">
+      <div class="gallery-card"><img src="/assets/gallery1.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery2.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery3.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery4.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery5.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery6.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery7.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery8.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery9.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery10.png" alt="Project" /></div>
+    </div>
+    <div class="scroll-row gallery-row-2" id="galleryRow2">
+      <div class="gallery-card"><img src="/assets/gallery6.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery3.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery10.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery1.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery8.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery5.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery4.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery7.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery2.png" alt="Project" /></div>
+      <div class="gallery-card"><img src="/assets/gallery9.png" alt="Project" /></div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section class="projects" id="projects">
+    <h2 class="section-mega-title" data-i18n="projects.title">PROIECTE</h2>
+    <div class="projects-showcase" id="projectsShowcase">
+      <!-- Projects injected via JS -->
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-floating-objects">
+        <div class="floating-obj floating-obj--1">❤️</div>
+        <div class="floating-obj floating-obj--2">🌸</div>
+        <div class="floating-obj floating-obj--3">💎</div>
+        <div class="floating-obj floating-obj--4">✨</div>
+      </div>
+      <h2 class="section-mega-title" data-i18n="about.title">DESPRE MINE</h2>
+      <div class="about-text-block">
+        <p data-i18n="about.line1">Cu peste 5 ani de experiență în design,</p>
+        <p data-i18n="about.line2">sunt specializat în branding, web design și user experience.</p>
+        <p data-i18n="about.line3">Îmi place să colaborez cu business-uri care vor să iasă în evidență</p>
+        <p data-i18n="about.line4">și să își prezinte cea mai bună parte.</p>
+        <p class="about-highlight" data-i18n="about.line5">Hai să creăm ceva extraordinar împreună!</p>
+      </div>
+      <a href="#contact" class="btn-contact" data-i18n="about.cta">CONTACTEAZĂ-MĂ</a>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services" id="services">
+    <div class="section-container">
+      <h2 class="section-mega-title services-title" data-i18n="services.title">SERVICII</h2>
+      <div class="services-list" id="servicesList">
+        <!-- Services injected via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS ===== -->
+  <section class="reviews" id="reviews">
+    <div class="section-container">
+      <h2 class="section-mega-title" data-i18n="reviews.title">RECENZII</h2>
+      <div class="reviews-track" id="reviewsTrack">
+        <!-- Reviews injected via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="section-container">
+      <div class="contact-inner">
+        <h2 class="section-mega-title" data-i18n="contact.title">CONTACT</h2>
+        <p class="contact-description" data-i18n="contact.description">Ai un proiect în minte? Hai să discutăm!</p>
+        <div class="contact-links">
+          <a href="tel:+40735163303" class="contact-link-item">
+            <span class="contact-icon">📞</span>
+            <span class="contact-value">0735 163 303</span>
+          </a>
+          <a href="mailto:contact@vladpanaitescu.com" class="contact-link-item">
+            <span class="contact-icon">✉️</span>
+            <span class="contact-value">contact@vladpanaitescu.com</span>
+          </a>
+          <a href="https://www.behance.net/vladpanaitescu" target="_blank" rel="noopener" class="contact-link-item">
+            <span class="contact-icon">🎨</span>
+            <span class="contact-value">behance.net/vladpanaitescu</span>
+          </a>
+        </div>
+        <a href="mailto:contact@vladpanaitescu.com" class="btn-contact btn-contact-lg" data-i18n="contact.cta_button">TRIMITE UN MESAJ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-content">
+        <span class="footer-logo">VP</span>
+        <p class="footer-copy">© 2026 Vlad Panaitescu. <span data-i18n="footer.rights">Toate drepturile rezervate.</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
