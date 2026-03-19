@@ -754,20 +754,42 @@ img {
   position: relative;
   z-index: 20;
   background: var(--bg-dark);
+  overflow: hidden;
+}
+
+.reviews .section-mega-title {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .reviews-track {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 24px;
+  will-change: transform;
+}
+
+.reviews-wow-emoji {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  font-size: 80px;
+  z-index: 5;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
 }
 
 .review-card {
-  padding: 36px;
+  padding: 40px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
   transition: all 0.4s var(--ease-out);
+  flex-shrink: 0;
+  width: 500px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  white-space: normal;
 }
 
 .review-card:hover {
@@ -1016,7 +1038,7 @@ img {
   }
 
   .reviews-track {
-    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .contact-links {

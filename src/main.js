@@ -11,7 +11,10 @@ const projects = [
 const reviews = [
   { text: 'Vlad a transformat complet identitatea vizuală a brandului nostru. Profesionalism și creativitate la cel mai înalt nivel!', name: 'Alexandru M.', role: 'CEO, Tech Startup', initials: 'AM' },
   { text: 'Colaborarea cu Vlad a fost excepțională. A înțeles perfect viziunea noastră și a livrat un design care a depășit așteptările.', name: 'Maria D.', role: 'Marketing Manager', initials: 'MD' },
-  { text: 'Design-urile lui Vlad sunt mereu creative și profesionale. Recomand cu încredere pentru orice proiect de branding sau UI/UX!', name: 'Cristian P.', role: 'Founder, E-commerce', initials: 'CP' }
+  { text: 'Design-urile lui Vlad sunt mereu creative și profesionale. Recomand cu încredere pentru orice proiect de branding sau UI/UX!', name: 'Cristian P.', role: 'Founder, E-commerce', initials: 'CP' },
+  { text: 'Am lucrat cu Vlad pentru rebrandingul companiei și rezultatul a fost spectaculos. Atenție la detalii și un simț estetic deosebit.', name: 'Ioana R.', role: 'Director Creativ', initials: 'IR' },
+  { text: 'Vlad livrează mereu la timp și peste așteptări. Website-ul nostru arată incredibil și conversiile au crescut cu 40%!', name: 'Andrei S.', role: 'Owner, Digital Agency', initials: 'AS' },
+  { text: 'Unul dintre cei mai talentați designeri cu care am colaborat. Fiecare proiect e tratat cu maximă seriozitate și pasiune.', name: 'Elena T.', role: 'Brand Manager', initials: 'ET' }
 ];
 
 const services = [
@@ -147,8 +150,9 @@ function initScrollDrivenRows() {
   const brandsRow = document.getElementById('brandsRow');
   const galleryRow1 = document.getElementById('galleryRow1');
   const galleryRow2 = document.getElementById('galleryRow2');
+  const reviewsTrack = document.getElementById('reviewsTrack');
 
-  if (!brandsRow && !galleryRow1 && !galleryRow2) return;
+  if (!brandsRow && !galleryRow1 && !galleryRow2 && !reviewsTrack) return;
 
   // Row 1 starts further left, Row 2 starts further right
   const initialOffset1 = -800;
@@ -173,6 +177,16 @@ function initScrollDrivenRows() {
     // Gallery row 2: scroll LEFT
     if (galleryRow2) {
       galleryRow2.style.transform = `translateX(${initialOffset2 + scrollY * -0.3}px) rotate(${tilt}deg)`;
+    }
+
+    // Reviews: scroll LEFT relative to section position
+    if (reviewsTrack) {
+      const reviewsSection = reviewsTrack.closest('.reviews');
+      const sectionTop = reviewsSection.getBoundingClientRect().top + scrollY;
+      const relativeScroll = scrollY - sectionTop + window.innerHeight;
+      if (relativeScroll > 0) {
+        reviewsTrack.style.transform = `translateX(${200 + relativeScroll * -0.4}px)`;
+      }
     }
 
     ticking = false;
