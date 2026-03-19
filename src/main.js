@@ -210,22 +210,24 @@ function updateActiveNav() {
   });
 }
 
-// ===== 3D CURSOR TRACKING =====
+// ===== CURSOR TRACKING — OPPOSITE TRANSLATE =====
 function initCursorTracking() {
   const avatar = document.getElementById('avatar3d');
   if (!avatar) return;
   let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+  const maxMove = 18; // max pixels to shift
   window.addEventListener('mousemove', (e) => {
-    const rect = avatar.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    targetY = ((e.clientX - cx) / window.innerWidth) * 30;
-    targetX = -((e.clientY - cy) / window.innerHeight) * 20;
+    // Normalized cursor position from center of viewport: -1 to 1
+    const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+    const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+    // Move in opposite direction
+    targetX = -nx * maxMove;
+    targetY = -ny * maxMove;
   });
   function animate() {
-    currentX += (targetX - currentX) * 0.08;
-    currentY += (targetY - currentY) * 0.08;
-    avatar.style.transform = `perspective(800px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+    currentX += (targetX - currentX) * 0.06;
+    currentY += (targetY - currentY) * 0.06;
+    avatar.style.transform = `translate(${currentX}px, ${currentY}px)`;
     requestAnimationFrame(animate);
   }
   animate();

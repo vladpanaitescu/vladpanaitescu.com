@@ -85,7 +85,6 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 40px;
   max-width: 1300px;
   margin: 0 auto;
   position: relative;
@@ -93,8 +92,10 @@ img {
 
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 60px;
   list-style: none;
+  flex: 1;
+  justify-content: center;
 }
 
 .nav-links a {
@@ -112,14 +113,11 @@ img {
 }
 
 .nav-center-logo {
-  flex-shrink: 0;
+  display: none;
 }
 
 .nav-logo {
-  font-family: var(--font-display);
-  font-size: 32px;
-  letter-spacing: 2px;
-  color: var(--text-white);
+  display: none;
 }
 
 .nav-actions {
@@ -238,14 +236,11 @@ img {
 
 /* ===== HERO — CENTERED AVATAR ===== */
 .hero {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: 100px 40px 40px;
-  text-align: center;
+  padding: 0 40px;
 }
 
 .hero-inner {
@@ -254,33 +249,49 @@ img {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  padding: 100px 0 50px;
 }
 
-.hero-mega-text {
+.hero-text-zone {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.hero-mega-title-line {
   font-family: var(--font-display);
-  font-size: clamp(50px, 10vw, 140px);
+  font-size: clamp(48px, 9vw, 140px);
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -2px;
-  line-height: 0.95;
+  line-height: 1;
   color: var(--text-white);
+  white-space: nowrap;
   opacity: 0;
   animation: fadeInUp 0.8s var(--ease-out) 0.1s forwards;
+  position: relative;
   z-index: 1;
 }
 
 .hero-avatar-zone {
-  position: relative;
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
-  margin: -20px 0 -50px;
   opacity: 0;
   animation: fadeInScale 1s var(--ease-out) 0.3s forwards;
+  pointer-events: none;
+}
+
+.hero-avatar-zone * {
+  pointer-events: auto;
 }
 
 .avatar-container {
-  width: 480px;
-  height: 480px;
+  width: 680px;
+  height: 680px;
 }
 
 .avatar-3d {
@@ -294,32 +305,32 @@ img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 30px 80px rgba(139, 92, 246, 0.35));
-}
-
-.hero-mega-name {
-  font-family: var(--font-display);
-  font-size: clamp(100px, 22vw, 320px);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: -6px;
-  line-height: 0.8;
-  color: var(--text-white);
-  z-index: 1;
-  opacity: 0;
-  animation: fadeInUp 0.8s var(--ease-out) 0.2s forwards;
 }
 
 .accent-dot {
   color: var(--accent-purple);
 }
 
+.hero-bottom-row {
+  position: absolute;
+  bottom: 50px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+}
+
 .hero-description {
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 1.6;
   color: var(--text-gray);
-  margin: 32px 0 24px;
-  max-width: 500px;
+  max-width: 280px;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
   opacity: 0;
   animation: fadeInUp 0.8s var(--ease-out) 0.5s forwards;
 }
@@ -876,12 +887,12 @@ img {
 @keyframes fadeInScale {
   from {
     opacity: 0;
-    transform: scale(0.85);
+    transform: translateX(-50%) scale(0.85);
   }
 
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateX(-50%) scale(1);
   }
 }
 
@@ -934,9 +945,23 @@ img {
     padding: 80px 20px 40px;
   }
 
+  .hero-mega-title-line {
+    font-size: 15vw;
+  }
+
   .avatar-container {
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
+  }
+
+  .hero-avatar-zone {
+    top: 25%;
+  }
+
+  .hero-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
   }
 
   .section-mega-title {
