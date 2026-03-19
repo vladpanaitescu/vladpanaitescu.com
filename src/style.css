@@ -589,6 +589,25 @@ img {
   position: relative;
 }
 
+.about-title {
+  position: relative;
+  z-index: 2;
+}
+
+.about-title .char {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out), filter 0.6s var(--ease-out);
+  will-change: transform, opacity, filter;
+}
+
+.about-title.visible .char {
+  opacity: 1;
+  transform: translate(0, 0) rotate(0deg) scale(1) !important;
+  filter: blur(0);
+}
+
 .about-floating-objects {
   position: absolute;
   inset: 0;
@@ -598,33 +617,47 @@ img {
 
 .floating-obj {
   position: absolute;
-  font-size: 48px;
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
   will-change: transform, opacity;
+  mix-blend-mode: screen;
 }
 
+.floating-obj img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Silver cross — top left, more off-screen */
 .floating-obj--1 {
-  top: -8%;
-  left: 5%;
-  font-size: 280px;
+  top: -25%;
+  left: -14%;
+  width: 420px;
+  height: 420px;
 }
 
+/* Diamond — top right */
 .floating-obj--2 {
-  top: 8%;
-  right: -3%;
-  font-size: 240px;
+  top: -14%;
+  right: -4%;
+  width: 320px;
+  height: 320px;
 }
 
+/* Flower — bottom right, more off-screen */
 .floating-obj--3 {
-  bottom: 2%;
-  right: 8%;
-  font-size: 240px;
+  bottom: -12%;
+  right: -14%;
+  width: 340px;
+  height: 340px;
 }
 
+/* Heart — bottom left */
 .floating-obj--4 {
-  bottom: -10%;
-  left: -3%;
-  font-size: 260px;
+  bottom: -18%;
+  left: -2%;
+  width: 360px;
+  height: 360px;
 }
 
 @keyframes floatObj {

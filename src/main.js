@@ -36,10 +36,44 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCursorTracking();
   initScrollDrivenRows();
+  initI18n();
+  initAboutTitleParticles();
   initScrollReveal();
   initAboutFloatingObjects();
-  initI18n();
+
+  // Re-apply particles after language change
+  document.addEventListener('languageChange', () => {
+    setTimeout(() => initAboutTitleParticles(), 50);
+  });
 });
+
+// ===== ABOUT TITLE — PARTICLE ASSEMBLY =====
+function initAboutTitleParticles() {
+  const title = document.querySelector('.about-title');
+  if (!title) return;
+
+  // Get current text (may already be translated)
+  const text = title.textContent;
+  title.innerHTML = '';
+  title.classList.remove('visible');
+
+  [...text].forEach((char, i) => {
+    const span = document.createElement('span');
+    span.classList.add('char');
+    span.textContent = char === ' ' ? '\u00A0' : char;
+
+    // Random scatter: big offsets, random rotation, random scale
+    const randX = (Math.random() - 0.5) * 600;
+    const randY = (Math.random() - 0.5) * 400;
+    const randRotate = (Math.random() - 0.5) * 120;
+    const randScale = 0.3 + Math.random() * 0.5;
+
+    span.style.transform = `translate(${randX}px, ${randY}px) rotate(${randRotate}deg) scale(${randScale})`;
+    span.style.transitionDelay = `${i * 0.04}s`;
+
+    title.appendChild(span);
+  });
+}
 
 // ===== RENDER PROJECTS =====
 function initProjects() {
@@ -116,9 +150,9 @@ function initScrollDrivenRows() {
 
   if (!brandsRow && !galleryRow1 && !galleryRow2) return;
 
-  // Center the gallery rows initially (negative offset so they're partially off-screen)
-  const initialOffset1 = -400;
-  const initialOffset2 = -200;
+  // Row 1 starts further left, Row 2 starts further right
+  const initialOffset1 = -800;
+  const initialOffset2 = 0;
 
   let ticking = false;
 
@@ -245,8 +279,8 @@ function initScrollReveal() {
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  document.querySelectorAll('.reveal, .section-mega-title, .service-item, .review-card, .project-item, .contact-inner, .about-text-block').forEach(el => {
-    if (!el.classList.contains('reveal')) el.classList.add('reveal');
+  document.querySelectorAll('.reveal, .section-mega-title, .service-item, .review-card, .project-item, .contact-inner, .about-text-block, .about-title').forEach(el => {
+    if (!el.classList.contains('reveal') && !el.classList.contains('about-title')) el.classList.add('reveal');
     observer.observe(el);
   });
 }
