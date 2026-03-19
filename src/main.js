@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursorTracking();
   initScrollDrivenRows();
   initScrollReveal();
+  initAboutFloatingObjects();
   initI18n();
 });
 
@@ -248,6 +249,64 @@ function initScrollReveal() {
     if (!el.classList.contains('reveal')) el.classList.add('reveal');
     observer.observe(el);
   });
+}
+
+// ===== ABOUT FLOATING OBJECTS — SCROLL-DRIVEN =====
+function initAboutFloatingObjects() {
+  const aboutSection = document.getElementById('about');
+  if (!aboutSection) return;
+
+  const floatingObjs = aboutSection.querySelectorAll('.floating-obj');
+  if (!floatingObjs.length) return;
+
+  // Config: direction per object (negative = from left, positive = from right)
+  const objConfig = [
+    { offsetX: -500 },  // obj--1: comes from left
+    { offsetX: 500 },   // obj--2: comes from right
+    { offsetX: 500 },   // obj--3: comes from right
+    { offsetX: -500 },  // obj--4: comes from left
+  ];
+
+  // Set initial state: fully off-screen
+  floatingObjs.forEach((obj, i) => {
+    const config = objConfig[i] || { offsetX: -500 };
+    obj.style.transform = `translateX(${config.offsetX}px)`;
+    obj.style.opacity = '0';
+  });
+
+  let ticking = false;
+
+  function updateFloatingObjects() {
+    const rect = aboutSection.getBoundingClientRect();
+    const windowH = window.innerHeight;
+
+    // Calculate progress: 0 when section top enters viewport bottom, 1 when section top reaches viewport top
+    const progress = Math.min(1, Math.max(0, (windowH - rect.top) / (windowH + rect.height * 0.3)));
+
+    // Ease function for smoother feel
+    const eased = progress < 0.5
+      ? 4 * progress * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+    floatingObjs.forEach((obj, i) => {
+      const config = objConfig[i] || { offsetX: -500 };
+      const currentX = config.offsetX * (1 - eased);
+      obj.style.transform = `translateX(${currentX}px)`;
+      obj.style.opacity = `${eased}`;
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateFloatingObjects);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial update
+  updateFloatingObjects();
 }
 
 // ===== LANGUAGE =====
