@@ -7,7 +7,7 @@ const translationData = {
     'nav.brands': 'CLIENȚI',
     'nav.projects': 'PROIECTE',
     'nav.contact': 'CONTACT',
-    'hero.greeting': 'SALUT',
+    'hero.greeting': 'BINE AI VENIT',
     'hero.description': 'Un Graphic Designer pasionat de crearea unor identități vizuale memorabile și experiențe digitale care inspiră 🎨',
     'hero.cta': 'CONTACTEAZĂ-MĂ',
     'projects.title': 'PROIECTE',
@@ -23,6 +23,8 @@ const translationData = {
     'brands.tag': 'CLIENȚI',
     'contact.title': 'CONTACT',
     'contact.description': 'Ai un proiect în minte? Hai să discutăm!',
+    'contact.name_placeholder': 'Nume',
+    'contact.message_placeholder': 'Mesajul tău...',
     'contact.cta_button': 'TRIMITE UN MESAJ',
     'footer.rights': 'Toate drepturile rezervate.'
   },
@@ -31,7 +33,7 @@ const translationData = {
     'nav.brands': 'CLIENTS',
     'nav.projects': 'PROJECTS',
     'nav.contact': 'CONTACT',
-    'hero.greeting': 'HI',
+    'hero.greeting': 'WELCOME',
     'hero.description': 'A Graphic Designer passionate about crafting memorable visual identities and inspiring digital experiences 🎨',
     'hero.cta': 'CONTACT ME',
     'projects.title': 'PROJECTS',
@@ -47,6 +49,8 @@ const translationData = {
     'brands.tag': 'CLIENTS',
     'contact.title': 'CONTACT',
     'contact.description': 'Have a project in mind? Let\'s talk!',
+    'contact.name_placeholder': 'Name',
+    'contact.message_placeholder': 'Your message...',
     'contact.cta_button': 'SEND A MESSAGE',
     'footer.rights': 'All rights reserved.'
   },
@@ -55,7 +59,7 @@ const translationData = {
     'nav.brands': 'KUNDEN',
     'nav.projects': 'PROJEKTE',
     'nav.contact': 'KONTAKT',
-    'hero.greeting': 'HALLO',
+    'hero.greeting': 'WILLKOMMEN',
     'hero.description': 'Ein Grafikdesigner mit Leidenschaft für einprägsame visuelle Identitäten und inspirierende digitale Erlebnisse 🎨',
     'hero.cta': 'KONTAKTIERE MICH',
     'projects.title': 'PROJEKTE',
@@ -71,6 +75,8 @@ const translationData = {
     'brands.tag': 'KUNDEN',
     'contact.title': 'KONTAKT',
     'contact.description': 'Hast du ein Projekt im Kopf? Lass uns reden!',
+    'contact.name_placeholder': 'Name',
+    'contact.message_placeholder': 'Deine Nachricht...',
     'contact.cta_button': 'NACHRICHT SENDEN',
     'footer.rights': 'Alle Rechte vorbehalten.'
   },
@@ -79,7 +85,7 @@ const translationData = {
     'nav.brands': 'CLIENTI',
     'nav.projects': 'PROGETTI',
     'nav.contact': 'CONTATTO',
-    'hero.greeting': 'CIAO',
+    'hero.greeting': 'BENVENUTO',
     'hero.description': 'Un Graphic Designer appassionato nel creare identità visive memorabili ed esperienze digitali che ispirano 🎨',
     'hero.cta': 'CONTATTAMI',
     'projects.title': 'PROGETTI',
@@ -95,6 +101,8 @@ const translationData = {
     'brands.tag': 'CLIENTI',
     'contact.title': 'CONTATTO',
     'contact.description': 'Hai un progetto in mente? Parliamone!',
+    'contact.name_placeholder': 'Nome',
+    'contact.message_placeholder': 'Il tuo messaggio...',
     'contact.cta_button': 'INVIA UN MESSAGGIO',
     'footer.rights': 'Tutti i diritti riservati.'
   },
@@ -103,7 +111,7 @@ const translationData = {
     'nav.brands': 'CLIENTS',
     'nav.projects': 'PROJETS',
     'nav.contact': 'CONTACT',
-    'hero.greeting': 'SALUT',
+    'hero.greeting': 'BIENVENUE',
     'hero.description': 'Un Graphic Designer passionné par la création d\'identités visuelles mémorables et d\'expériences numériques inspirantes 🎨',
     'hero.cta': 'CONTACTEZ-MOI',
     'projects.title': 'PROJETS',
@@ -119,6 +127,8 @@ const translationData = {
     'brands.tag': 'CLIENTS',
     'contact.title': 'CONTACT',
     'contact.description': 'Vous avez un projet en tête ? Parlons-en !',
+    'contact.name_placeholder': 'Nom',
+    'contact.message_placeholder': 'Votre message...',
     'contact.cta_button': 'ENVOYER UN MESSAGE',
     'footer.rights': 'Tous droits réservés.'
   }
@@ -150,6 +160,10 @@ function applyTranslations(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (data[key]) el.textContent = data[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (data[key]) el.placeholder = data[key];
   });
   document.documentElement.lang = lang;
 }

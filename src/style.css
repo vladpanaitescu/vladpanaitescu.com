@@ -359,17 +359,36 @@ img {
   background-origin: border-box;
   background-clip: padding-box, border-box;
   color: var(--text-white);
-  transition: all 0.3s var(--ease-out);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
   text-transform: uppercase;
   opacity: 0;
   animation: fadeInUp 0.8s var(--ease-out) 0.6s forwards;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-contact::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--accent-gradient);
+  border-radius: 100px;
+  transform: translateX(-100%) skewX(-15deg);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: -1;
+}
+
+.btn-contact:hover::before {
+  transform: translateX(0) skewX(0deg);
 }
 
 .btn-contact:hover {
-  background-image: var(--accent-gradient), var(--accent-gradient);
-  color: var(--text-white);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
 }
 
 .btn-contact-lg {
@@ -516,7 +535,8 @@ img {
 }
 
 .project-card {
-  display: block;
+  display: flex;
+  align-items: stretch;
   padding: 28px;
   background: var(--bg-dark);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -526,6 +546,10 @@ img {
   z-index: var(--i, 0);
   transition: box-shadow 0.4s var(--ease-out), border-color 0.3s;
   box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
+  gap: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .project-card:hover {
@@ -534,13 +558,14 @@ img {
 }
 
 .project-card-content {
+  flex: 1;
   display: flex;
   gap: 40px;
-  align-items: stretch;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-card-left {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -555,19 +580,22 @@ img {
 
 .project-number {
   font-family: var(--font-display);
-  font-size: clamp(40px, 5vw, 60px);
-  color: rgba(255, 255, 255, 0.12);
+  font-size: clamp(80px, 10vw, 140px);
+  color: rgba(255, 255, 255, 0.06);
   line-height: 1;
-  letter-spacing: -1px;
+  letter-spacing: -4px;
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
 }
 
 .project-card:hover .project-number {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.12);
 }
 
 .project-title {
   font-family: var(--font-display);
-  font-size: clamp(16px, 2vw, 22px);
+  font-size: clamp(20px, 2.5vw, 28px);
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--text-white);
@@ -583,7 +611,6 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
 
 .project-card-img {
@@ -796,20 +823,7 @@ img {
 .reviews-track {
   display: flex;
   gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 0 40px 20px;
-  scrollbar-width: none;
-  cursor: grab;
-}
-
-.reviews-track::-webkit-scrollbar {
-  display: none;
-}
-
-.reviews-track:active {
-  cursor: grabbing;
+  will-change: transform;
 }
 
 .reviews-wow-emoji {
@@ -834,7 +848,6 @@ img {
   flex-direction: column;
   justify-content: space-between;
   white-space: normal;
-  scroll-snap-align: start;
 }
 
 .review-card:hover {
@@ -907,36 +920,61 @@ img {
   margin-bottom: 48px;
 }
 
-.contact-links {
+.contact-form {
   display: flex;
-  justify-content: center;
-  gap: 32px;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 500px;
+  margin: 0 auto 32px;
+  width: 100%;
 }
 
-.contact-link-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 28px;
+.contact-input,
+.contact-textarea {
+  width: 100%;
+  padding: 16px 20px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 100px;
-  transition: all 0.3s;
-  font-size: 15px;
-  color: var(--text-gray);
-}
-
-.contact-link-item:hover {
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
   color: var(--text-white);
-  border-color: rgba(139, 92, 246, 0.3);
-  transform: translateY(-2px);
+  font-family: var(--font-body);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s, background 0.3s;
+  box-sizing: border-box;
 }
 
-.contact-icon {
-  font-size: 20px;
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.contact-textarea {
+  resize: vertical;
+  min-height: 120px;
+  max-height: 400px;
+}
+
+.contact-form .btn-contact {
+  align-self: center;
+}
+
+.contact-email {
+  display: inline-block;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--text-gray);
+  transition: color 0.3s;
+}
+
+.contact-email:hover {
+  color: var(--text-white);
 }
 
 /* ===== FOOTER ===== */

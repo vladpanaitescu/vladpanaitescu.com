@@ -9,12 +9,15 @@ const services = [
 ];
 
 const reviews = [
-  { text: 'Vlad a transformat complet identitatea vizuală a brandului nostru. Profesionalism și creativitate la cel mai înalt nivel!', name: 'Alexandru M.', role: 'CEO, Tech Startup', initials: 'AM' },
-  { text: 'Colaborarea cu Vlad a fost excepțională. A înțeles perfect viziunea noastră și a livrat un design care a depășit așteptările.', name: 'Maria D.', role: 'Marketing Manager', initials: 'MD' },
-  { text: 'Design-urile lui Vlad sunt mereu creative și profesionale. Recomand cu încredere pentru orice proiect de branding sau UI/UX!', name: 'Cristian P.', role: 'Founder, E-commerce', initials: 'CP' },
-  { text: 'Am lucrat cu Vlad pentru rebrandingul companiei și rezultatul a fost spectaculos. Atenție la detalii și un simț estetic deosebit.', name: 'Ioana R.', role: 'Director Creativ', initials: 'IR' },
-  { text: 'Vlad livrează mereu la timp și peste așteptări. Website-ul nostru arată incredibil și conversiile au crescut cu 40%!', name: 'Andrei S.', role: 'Owner, Digital Agency', initials: 'AS' },
-  { text: 'Unul dintre cei mai talentați designeri cu care am colaborat. Fiecare proiect e tratat cu maximă seriozitate și pasiune.', name: 'Elena T.', role: 'Brand Manager', initials: 'ET' }
+  { text: 'Ne-a făcut logo-ul și tot brandul de la zero. Sincer, nu mă așteptam să fie chiar atât de bine — toți clienții ne întreabă cine ne-a făcut identitatea.', name: 'Alexandru M.', role: 'CEO, Tech Startup', initials: 'AM' },
+  { text: 'Am trecut prin 3 designeri înainte de Vlad. El a fost singurul care a prins exact ce voiam fără să-i explic de 10 ori. Rapid, curat, fără bătăi de cap.', name: 'Maria D.', role: 'Marketing Manager', initials: 'MD' },
+  { text: 'Lucrez cu el de vreo 2 ani deja. De fiecare dată livrează peste ce cer. Materialele pentru social media arată bestial, nu am ce zice.', name: 'Cristian P.', role: 'Founder, E-commerce', initials: 'CP' },
+  { text: 'Ne-a refăcut tot site-ul și identitatea vizuală. Am primit feedback doar pozitiv de la partenerii noștri. Recomand fără ezitare.', name: 'Ioana R.', role: 'Director Creativ', initials: 'IR' },
+  { text: 'Site-ul pe care ni l-a făcut arată de 10 ori mai bine decât competiția. Plus că a venit cu idei proprii, nu a așteptat doar brief-ul.', name: 'Andrei S.', role: 'Owner, Digital Agency', initials: 'AS' },
+  { text: 'Am avut un deadline imposibil pentru un pitch și Vlad a reușit să livreze tot pachetul vizual în 3 zile. Calitate top, chiar și sub presiune.', name: 'Elena T.', role: 'Brand Manager', initials: 'ET' },
+  { text: 'Ne-a făcut un video promo care a strâns 50k vizualizări organic. Nu credeam că o să iasă ceva atât de profi din bugetul nostru mic.', name: 'Dan V.', role: 'Co-founder, SaaS', initials: 'DV' },
+  { text: 'Tipul face treabă bună și nu complică lucrurile. Asta e rar. Îi zici ce vrei, înțelege repede, și primești ceva mișto.', name: 'Laura B.', role: 'Owner, Boutique Hotel', initials: 'LB' },
+  { text: 'A fost singura persoană care ne-a convins că rebrandingul merită. Și a avut dreptate — vânzările online au crescut cu 30% după schimbare.', name: 'Mihai C.', role: 'CEO, Retail Brand', initials: 'MC' }
 ];
 
 const brands = [
@@ -35,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAboutTitleParticles();
   initScrollReveal();
   initAboutFloatingObjects();
-  initReviewsSwipe();
+  initReviewsDrag();
 
   // Re-apply particles after language change
   document.addEventListener('languageChange', () => {
@@ -76,20 +79,15 @@ function initProjects() {
   const container = document.getElementById('projectsShowcase');
   if (!container) return;
   container.innerHTML = services.map((s, i) => `
-    <div class="project-card" style="--i:${i + 1}">
+    <a href="#contact" class="project-card" style="--i:${i + 1}">
+      <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
       <div class="project-card-content">
-        <div class="project-card-left">
-          <div class="project-card-header">
-            <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
-            <h3 class="project-title">${s.title}</h3>
-          </div>
-        </div>
+        <h3 class="project-title">${s.title}</h3>
         <div class="project-card-images">
           <div class="project-card-img"><img src="${s.img}" alt="${s.title}" /></div>
         </div>
       </div>
-      <a href="#contact" class="btn-contact btn-contact-sm project-contact-btn">CONTACT</a>
-    </div>
+    </a>
   `).join('');
 }
 
@@ -160,7 +158,16 @@ function initScrollDrivenRows() {
       galleryRow2.style.transform = `translateX(${initialOffset2 + scrollY * -0.3}px) rotate(${tilt}deg)`;
     }
 
-    // Reviews: no longer scroll-driven, now swipeable
+    // Reviews: scroll LEFT relative to section position + user drag offset
+    if (reviewsTrack) {
+      const reviewsSection = reviewsTrack.closest('.reviews');
+      const sectionTop = reviewsSection.getBoundingClientRect().top + scrollY;
+      const relativeScroll = scrollY - sectionTop + window.innerHeight;
+      const dragOffset = parseFloat(reviewsTrack.dataset.dragOffset || 0);
+      if (relativeScroll > 0) {
+        reviewsTrack.style.transform = `translateX(${200 + relativeScroll * -0.4 + dragOffset}px)`;
+      }
+    }
 
     // Hero bottom → Brands title transition (when avatar scrolls out)
     if (avatarContainer && heroBottomRow && brandsTitle) {
@@ -351,29 +358,42 @@ window.setLanguage = function (lang) {
   document.dispatchEvent(new CustomEvent('languageChange', { detail: { lang } }));
 };
 
-// ===== REVIEWS SWIPE =====
-function initReviewsSwipe() {
+// ===== REVIEWS DRAG/SWIPE =====
+function initReviewsDrag() {
   const track = document.getElementById('reviewsTrack');
   if (!track) return;
 
   let isDown = false;
   let startX;
-  let scrollLeft;
+  let startOffset;
 
-  track.addEventListener('mousedown', (e) => {
+  function onStart(x) {
     isDown = true;
-    startX = e.pageX - track.offsetLeft;
-    scrollLeft = track.scrollLeft;
-  });
+    track.style.cursor = 'grabbing';
+    startX = x;
+    startOffset = parseFloat(track.dataset.dragOffset || 0);
+  }
 
-  track.addEventListener('mouseleave', () => { isDown = false; });
-  track.addEventListener('mouseup', () => { isDown = false; });
-
-  track.addEventListener('mousemove', (e) => {
+  function onMove(x) {
     if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - track.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    track.scrollLeft = scrollLeft - walk;
-  });
+    const walk = x - startX;
+    track.dataset.dragOffset = startOffset + walk;
+  }
+
+  function onEnd() {
+    isDown = false;
+    track.style.cursor = 'grab';
+  }
+
+  track.style.cursor = 'grab';
+
+  // Mouse events
+  track.addEventListener('mousedown', (e) => { e.preventDefault(); onStart(e.pageX); });
+  window.addEventListener('mousemove', (e) => { if (isDown) { e.preventDefault(); onMove(e.pageX); } });
+  window.addEventListener('mouseup', onEnd);
+
+  // Touch events
+  track.addEventListener('touchstart', (e) => onStart(e.touches[0].pageX), { passive: true });
+  track.addEventListener('touchmove', (e) => onMove(e.touches[0].pageX), { passive: true });
+  track.addEventListener('touchend', onEnd);
 }
