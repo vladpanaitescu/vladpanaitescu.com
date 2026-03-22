@@ -1,11 +1,11 @@
 import './style.css';
 import { initI18n } from './i18n.js';
 
-// ===== PROJECT DATA =====
-const projects = [
-  { title: 'BGS – National Campaign', category: 'Visual Development', client: 'BGS', url: 'https://www.behance.net/gallery/245553355/BGS-National-Campaign-Visual-Development', imgs: ['/assets/gallery1.png', '/assets/gallery2.png'] },
-  { title: 'SpaceDev Logo Design', category: 'Branding / Logo', client: 'SpaceDev', url: 'https://www.behance.net/gallery/245064453/SpaceDev-Logo-Design', imgs: ['/assets/gallery3.png', '/assets/gallery4.png'] },
-  { title: 'Oradea Parking App', category: 'Tutorial Series', client: 'Primăria Oradea', url: 'https://www.behance.net/gallery/245062349/Oradea-Parking-App-Official-Tutorial-Series', imgs: ['/assets/gallery5.png', '/assets/gallery6.png'] }
+const services = [
+  { title: 'BRANDING & VISUAL IDENTITY', img: '/assets/Servicii/1.png' },
+  { title: 'WEB DESIGN & DEVELOPMENT', img: '/assets/Servicii/2.png' },
+  { title: 'GRAPHIC DESIGN & CAMPAIGNS', img: '/assets/Servicii/3.png' },
+  { title: 'VIDEO PRODUCTION & EDITING', img: '/assets/Servicii/4.png' }
 ];
 
 const reviews = [
@@ -15,13 +15,6 @@ const reviews = [
   { text: 'Am lucrat cu Vlad pentru rebrandingul companiei și rezultatul a fost spectaculos. Atenție la detalii și un simț estetic deosebit.', name: 'Ioana R.', role: 'Director Creativ', initials: 'IR' },
   { text: 'Vlad livrează mereu la timp și peste așteptări. Website-ul nostru arată incredibil și conversiile au crescut cu 40%!', name: 'Andrei S.', role: 'Owner, Digital Agency', initials: 'AS' },
   { text: 'Unul dintre cei mai talentați designeri cu care am colaborat. Fiecare proiect e tratat cu maximă seriozitate și pasiune.', name: 'Elena T.', role: 'Brand Manager', initials: 'ET' }
-];
-
-const services = [
-  { title: 'BRANDING & IDENTITATE VIZUALĂ', description: 'Crearea de logo-uri, identități vizuale complete și ghiduri de brand care definesc și diferențiază afacerea ta pe piață.' },
-  { title: 'WEB DESIGN & UI/UX', description: 'Design de site-uri web și interfețe intuitive, orientate către conversie, cu focus pe experiența utilizatorului.' },
-  { title: 'GRAPHIC DESIGN & CAMPANII', description: 'Materiale vizuale pentru campanii publicitare, social media și print — de la concept la execuție.' },
-  { title: 'MOTION GRAPHICS & ANIMAȚIE', description: 'Animații de logo, motion graphics pentru social media și conținut video dinamic pentru brandurile tale.' }
 ];
 
 const brands = [
@@ -34,7 +27,6 @@ const brands = [
 document.addEventListener('DOMContentLoaded', () => {
   initProjects();
   initReviews();
-  initServices();
   initBrandsRow();
   initNavbar();
   initCursorTracking();
@@ -43,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAboutTitleParticles();
   initScrollReveal();
   initAboutFloatingObjects();
+  initReviewsSwipe();
 
   // Re-apply particles after language change
   document.addEventListener('languageChange', () => {
@@ -78,27 +71,25 @@ function initAboutTitleParticles() {
   });
 }
 
-// ===== RENDER PROJECTS =====
+// ===== RENDER SERVICES (in projects section) =====
 function initProjects() {
   const container = document.getElementById('projectsShowcase');
   if (!container) return;
-  container.innerHTML = projects.map((p, i) => `
-    <a href="${p.url}" target="_blank" rel="noopener" class="project-card" style="--i:${i + 1}">
-      <div class="project-card-header">
+  container.innerHTML = services.map((s, i) => `
+    <div class="project-card" style="--i:${i + 1}">
+      <div class="project-card-content">
         <div class="project-card-left">
-          <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
-          <div class="project-card-meta">
-            <span class="project-category">${p.category}</span>
-            <h3 class="project-title">${p.client}</h3>
+          <div class="project-card-header">
+            <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
+            <h3 class="project-title">${s.title}</h3>
           </div>
         </div>
-        <span class="project-live-btn">LIVE PROJECT</span>
+        <div class="project-card-images">
+          <div class="project-card-img"><img src="${s.img}" alt="${s.title}" /></div>
+        </div>
       </div>
-      <div class="project-card-images">
-        <div class="project-card-img"><img src="${p.imgs[0]}" alt="${p.title}" /></div>
-        <div class="project-card-img"><img src="${p.imgs[1]}" alt="${p.title}" /></div>
-      </div>
-    </a>
+      <a href="#contact" class="btn-contact btn-contact-sm project-contact-btn">CONTACT</a>
+    </div>
   `).join('');
 }
 
@@ -122,19 +113,6 @@ function initReviews() {
 }
 
 // ===== RENDER SERVICES =====
-function initServices() {
-  const container = document.getElementById('servicesList');
-  if (!container) return;
-  container.innerHTML = services.map((s, i) => `
-    <div class="service-item reveal">
-      <span class="service-number">${String(i + 1).padStart(2, '0')}</span>
-      <div class="service-content">
-        <h3>${s.title}</h3>
-        <p>${s.description}</p>
-      </div>
-    </div>
-  `).join('');
-}
 
 // ===== RENDER BRANDS ROW =====
 function initBrandsRow() {
@@ -151,6 +129,9 @@ function initScrollDrivenRows() {
   const galleryRow1 = document.getElementById('galleryRow1');
   const galleryRow2 = document.getElementById('galleryRow2');
   const reviewsTrack = document.getElementById('reviewsTrack');
+  const heroBottomRow = document.querySelector('.hero-bottom-row');
+  const brandsTitle = document.getElementById('brandsTitle');
+  const avatarContainer = document.getElementById('avatarContainer');
 
   if (!brandsRow && !galleryRow1 && !galleryRow2 && !reviewsTrack) return;
 
@@ -162,7 +143,7 @@ function initScrollDrivenRows() {
 
   function updateScroll() {
     const scrollY = window.scrollY;
-    const tilt = -2; // same angle for all rows
+    const tilt = -2;
 
     // Brands: scroll LEFT
     if (brandsRow) {
@@ -179,14 +160,22 @@ function initScrollDrivenRows() {
       galleryRow2.style.transform = `translateX(${initialOffset2 + scrollY * -0.3}px) rotate(${tilt}deg)`;
     }
 
-    // Reviews: scroll LEFT relative to section position
-    if (reviewsTrack) {
-      const reviewsSection = reviewsTrack.closest('.reviews');
-      const sectionTop = reviewsSection.getBoundingClientRect().top + scrollY;
-      const relativeScroll = scrollY - sectionTop + window.innerHeight;
-      if (relativeScroll > 0) {
-        reviewsTrack.style.transform = `translateX(${200 + relativeScroll * -0.4}px)`;
-      }
+    // Reviews: no longer scroll-driven, now swipeable
+
+    // Hero bottom → Brands title transition (when avatar scrolls out)
+    if (avatarContainer && heroBottomRow && brandsTitle) {
+      const avatarRect = avatarContainer.getBoundingClientRect();
+      const avatarBottom = avatarRect.bottom;
+      // Start transition when avatar is near top of viewport, complete faster
+      const progress = Math.min(1, Math.max(0, (200 - avatarBottom) / 200));
+      
+      // Fade out hero bottom row
+      heroBottomRow.style.opacity = 1 - progress;
+      heroBottomRow.style.transform = `translateY(${-progress * 30}px) scale(${1 - progress * 0.1})`;
+      
+      // Fade in brands title
+      brandsTitle.style.opacity = progress;
+      brandsTitle.style.transform = `translateY(${(1 - progress) * 20}px) rotate(-2deg)`;
     }
 
     ticking = false;
@@ -358,6 +347,33 @@ function initAboutFloatingObjects() {
 }
 
 // ===== LANGUAGE =====
-window.setLanguage = function(lang) {
+window.setLanguage = function (lang) {
   document.dispatchEvent(new CustomEvent('languageChange', { detail: { lang } }));
 };
+
+// ===== REVIEWS SWIPE =====
+function initReviewsSwipe() {
+  const track = document.getElementById('reviewsTrack');
+  if (!track) return;
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+
+  track.addEventListener('mouseleave', () => { isDown = false; });
+  track.addEventListener('mouseup', () => { isDown = false; });
+
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    track.scrollLeft = scrollLeft - walk;
+  });
+}
