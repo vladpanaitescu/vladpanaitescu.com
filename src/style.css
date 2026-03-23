@@ -590,12 +590,12 @@ body.menu-open {
   align-items: stretch;
   padding: 28px;
   background: var(--bg-dark);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 24px;
   position: sticky;
   top: calc(80px + var(--i, 0) * 80px);
   z-index: var(--i, 0);
-  transition: box-shadow 0.4s var(--ease-out), border-color 0.3s;
+  transition: box-shadow 0.4s var(--ease-out), border-color 0.4s;
   box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
   gap: 0;
   cursor: pointer;
@@ -633,13 +633,14 @@ body.menu-open {
 .project-number {
   font-family: var(--font-display);
   font-size: clamp(120px, 15vw, 210px);
-  color: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.04);
   line-height: 0.8;
   letter-spacing: -6px;
   display: flex;
   align-items: center;
   padding-right: 20px;
   flex-shrink: 0;
+  transition: color 0.4s var(--ease-out);
 }
 
 .project-card:hover .project-number {
@@ -651,6 +652,11 @@ body.menu-open {
   font-size: clamp(20px, 2.5vw, 28px);
   letter-spacing: 1px;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.2);
+  transition: color 0.4s var(--ease-out);
+}
+
+.project-card:hover .project-title {
   color: var(--text-white);
 }
 
