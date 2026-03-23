@@ -35,3 +35,6 @@ lerna-debug.log*
 _agent/
 _agents/
 brain/
+
+# Local Netlify folder
+.netlify
