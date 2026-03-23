@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vlad Panaitescu — Graphic Designer</title>
   <meta name="description" content="Portofoliu de design grafic — branding, UI/UX, ilustrație și motion graphics." />
@@ -14,6 +15,11 @@
 </head>
 
 <body>
+
+  <!-- ===== LOADER ===== -->
+  <div class="loader-overlay" id="loaderOverlay">
+    <div class="loader-spinner"></div>
+  </div>
 
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
@@ -144,7 +150,7 @@
         <p data-i18n="about.line1">De la strategie de brand până la producție video,</p>
         <p data-i18n="about.line2">transform idei în identități vizuale puternice, website-uri și campanii care
           performează.</p>
-        <p data-i18n="about.line3">Branding, web design, graphic design, video — tot ce ține de creative marketing,</p>
+        <p data-i18n="about.line3">Branding, web design, graphic design, video, tot ce ține de creative marketing,</p>
         <p class="about-highlight" data-i18n="about.line5">Hai să construim ceva memorabil împreună.</p>
       </div>
       <a href="#contact" class="btn-contact" data-i18n="about.cta">CONTACTEAZĂ-MĂ</a>
@@ -168,10 +174,14 @@
         <p class="contact-description" data-i18n="contact.description">Ai un proiect în minte? Hai să discutăm!</p>
         <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true">
           <input type="hidden" name="form-name" value="contact" />
-          <input type="text" name="name" class="contact-input" placeholder="Nume" data-i18n-placeholder="contact.name_placeholder" required />
-          <input type="email" name="email" class="contact-input" placeholder="Email" data-i18n-placeholder="contact.email_placeholder" required />
-          <textarea name="message" class="contact-textarea" placeholder="Mesajul tău..." data-i18n-placeholder="contact.message_placeholder" rows="5" required></textarea>
-          <button type="submit" class="btn-contact btn-contact-lg" data-i18n="contact.cta_button">TRIMITE UN MESAJ</button>
+          <input type="text" name="name" class="contact-input" placeholder="Nume"
+            data-i18n-placeholder="contact.name_placeholder" required />
+          <input type="email" name="email" class="contact-input" placeholder="Email"
+            data-i18n-placeholder="contact.email_placeholder" required />
+          <textarea name="message" class="contact-textarea" placeholder="Mesajul tău..."
+            data-i18n-placeholder="contact.message_placeholder" rows="5" required></textarea>
+          <button type="submit" class="btn-contact btn-contact-lg" data-i18n="contact.cta_button">TRIMITE UN
+            MESAJ</button>
           <p class="form-status" id="formStatus"></p>
         </form>
         <a href="mailto:contact@vladpanaitescu.com" class="contact-email">contact@vladpanaitescu.com</a>

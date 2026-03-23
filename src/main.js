@@ -29,6 +29,15 @@ const brands = [
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
+  history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
+  // Hide site content until loaded
+  const hero = document.querySelector('.hero');
+  const navbar = document.querySelector('.navbar');
+  if (hero) hero.style.opacity = '0';
+  if (navbar) navbar.style.opacity = '0';
+
   initProjects();
   initReviews();
   initBrandsRow();
@@ -36,16 +45,30 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursorTracking();
   initScrollDrivenRows();
   initI18n();
-  initAboutTitleParticles();
   initScrollReveal();
   initAboutFloatingObjects();
   initReviewsDrag();
   initContactForm();
+  initAboutTextFade();
 
-  // Re-apply particles after language change
-  document.addEventListener('languageChange', () => {
-    setTimeout(() => initAboutTitleParticles(), 50);
-  });
+  // Wait for all assets then reveal
+  function revealSite() {
+    const loader = document.getElementById('loaderOverlay');
+    if (loader) loader.classList.add('hidden');
+    
+    setTimeout(() => {
+      if (hero) { hero.style.transition = 'opacity 1s ease'; hero.style.opacity = '1'; }
+      if (navbar) { navbar.style.transition = 'opacity 1s ease 0.3s'; navbar.style.opacity = '1'; }
+    }, 100);
+  }
+
+  // Reveal on window load or after 5s timeout
+  if (document.readyState === 'complete') {
+    revealSite();
+  } else {
+    window.addEventListener('load', revealSite);
+    setTimeout(revealSite, 5000);
+  }
 });
 
 // ===== ABOUT TITLE — PARTICLE ASSEMBLY =====
@@ -82,7 +105,7 @@ function initProjects() {
   if (!container) return;
   container.innerHTML = services.map((s, i) => `
     <a href="#contact" class="project-card" style="--i:${i + 1}">
-      <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
+      <span class="project-number">${i + 1}</span>
       <div class="project-card-content">
         <h3 class="project-title">${s.title}</h3>
         <div class="project-card-images">
@@ -444,3 +467,31 @@ function initContactForm() {
     btn.style.opacity = '1';
   });
 }
+
+// ===== ABOUT TEXT — SCROLL-DRIVEN FADE =====
+function initAboutTextFade() {
+  const paragraphs = document.querySelectorAll('.about-title, .about-text-block p, .about .btn-contact');
+  if (!paragraphs.length) return;
+
+  paragraphs.forEach(p => { p.style.opacity = '0'; p.style.transition = 'opacity 0.1s'; });
+
+  let ticking = false;
+  function update() {
+    const windowH = window.innerHeight;
+    paragraphs.forEach(p => {
+      const rect = p.getBoundingClientRect();
+      // Start fading in when element enters bottom 20% of viewport
+      const start = windowH;
+      const end = windowH * 0.4;
+      const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+      p.style.opacity = progress;
+    });
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  update();
+}
+
