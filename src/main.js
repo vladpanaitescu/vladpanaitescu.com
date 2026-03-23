@@ -30,6 +30,7 @@ const brands = [
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
   history.scrollRestoration = 'manual';
+  if (window.location.hash) history.replaceState(null, '', window.location.pathname);
   window.scrollTo(0, 0);
 
   // Hide site content until loaded
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReviewsDrag();
   initContactForm();
   initAboutTextFade();
+  initServiceCardsFade();
 
   // Wait for all assets then reveal
   function revealSite() {
@@ -495,3 +497,50 @@ function initAboutTextFade() {
   update();
 }
 
+// ===== SERVICE CARDS — SCROLL-DRIVEN FADE =====
+function initServiceCardsFade() {
+  const cards = Array.from(document.querySelectorAll('.project-card'));
+  if (!cards.length) return;
+
+  // Store natural positions (before sticky kicks in)
+  const positions = cards.map(card => {
+    let top = card.offsetTop;
+    let el = card.offsetParent;
+    while (el) { top += el.offsetTop; el = el.offsetParent; }
+    return top;
+  });
+
+  let ticking = false;
+  function update() {
+    const scrollY = window.scrollY;
+    const windowH = window.innerHeight;
+
+    // Find active card: last card whose natural top has been scrolled past
+    let activeIdx = 0;
+    for (let i = 0; i < positions.length; i++) {
+      if (scrollY + windowH * 0.5 >= positions[i]) activeIdx = i;
+    }
+
+    cards.forEach((card, i) => {
+      const isActive = i === activeIdx;
+      const progress = isActive ? 1 : 0;
+
+      card.style.borderColor = `rgba(255,255,255,${isActive ? 0.15 : 0.03})`;
+      const title = card.querySelector('.project-title');
+      if (title) title.style.color = `rgba(255,255,255,${isActive ? 1 : 0.2})`;
+      const num = card.querySelector('.project-number');
+      if (num) num.style.color = `rgba(255,255,255,${isActive ? 0.12 : 0.02})`;
+      card.querySelectorAll('.project-card-img img').forEach(img => {
+        img.style.opacity = isActive ? 1 : 0.2;
+      });
+    });
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+
+  // Delay initial update to let layout settle
+  setTimeout(update, 100);
+}
