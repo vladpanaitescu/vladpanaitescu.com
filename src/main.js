@@ -1,5 +1,5 @@
 import './style.css';
-import { initI18n } from './i18n.js';
+import { initI18n, getCurrentLang, translationData } from './i18n.js';
 
 const services = [
   { title: 'BRANDING & VISUAL IDENTITY', img: '/assets/Servicii/1.png' },
@@ -23,7 +23,8 @@ const reviews = [
 const brands = [
   'BGS', 'ShopBGS', 'Origo', 'Brewzeus', 'Absolut', 'Havana',
   "Ballantine's", 'Chivas', 'Steam Coffee Shop', 'Trofic Food',
-  'Huawei', 'SpaceDev', 'Primăria Oradea', 'Napoleon Games', 'Superbet'
+  'Huawei', 'SpaceDev', 'Primăria Oradea', 'Napoleon Games', 'Superbet',
+  'Plative', 'carVertical', 'Magna Tuning'
 ];
 
 // ===== INIT =====
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initAboutFloatingObjects();
   initReviewsDrag();
+  initContactForm();
 
   // Re-apply particles after language change
   document.addEventListener('languageChange', () => {
@@ -116,9 +118,11 @@ function initReviews() {
 function initBrandsRow() {
   const row = document.getElementById('brandsRow');
   if (!row) return;
-  // Double the brands so we have enough to fill scrolling
-  const doubled = [...brands, ...brands, ...brands];
-  row.innerHTML = doubled.map(b => `<span class="brand-item">${b}</span>`).join('');
+  // Shuffle brands
+  const shuffled = [...brands].sort(() => Math.random() - 0.5);
+  // Triple for seamless scrolling
+  const tripled = [...shuffled, ...shuffled, ...shuffled];
+  row.innerHTML = tripled.map(b => `<span class="brand-item">${b}</span>`).join('');
 }
 
 // ===== SCROLL-DRIVEN HORIZONTAL MOVEMENT =====
@@ -215,12 +219,14 @@ function initNavbar() {
   hamburger?.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navLinks.forEach(nl => nl.classList.toggle('open'));
+    document.body.classList.toggle('menu-open');
   });
 
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
       hamburger?.classList.remove('active');
       navLinks.forEach(nl => nl.classList.remove('open'));
+      document.body.classList.remove('menu-open');
     });
   });
 
@@ -396,4 +402,45 @@ function initReviewsDrag() {
   track.addEventListener('touchstart', (e) => onStart(e.touches[0].pageX), { passive: true });
   track.addEventListener('touchmove', (e) => onMove(e.touches[0].pageX), { passive: true });
   track.addEventListener('touchend', onEnd);
+}
+
+// ===== CONTACT FORM =====
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = document.getElementById('formStatus');
+    const btn = form.querySelector('button[type="submit"]');
+    const lang = getCurrentLang();
+    const t = translationData[lang] || translationData['ro'];
+
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    status.textContent = '';
+    status.className = 'form-status';
+
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      });
+
+      if (res.ok) {
+        status.textContent = t['contact.success'] || 'Sent!';
+        status.classList.add('success');
+        form.reset();
+      } else {
+        throw new Error('Not ok');
+      }
+    } catch {
+      status.textContent = t['contact.error'] || 'Error';
+      status.classList.add('error');
+    }
+
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  });
 }

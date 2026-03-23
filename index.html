@@ -18,6 +18,9 @@
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span>
+      </button>
       <ul class="nav-links" id="navLinks">
         <li><a href="#brands" data-i18n="nav.brands">CLIENȚI</a></li>
         <li><a href="#projects" data-i18n="nav.projects">PROIECTE</a></li>
@@ -38,9 +41,6 @@
             <button class="lang-option" data-lang="fr"><span>🇫🇷</span> Français</button>
           </div>
         </div>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
       </div>
     </div>
   </nav>
@@ -166,10 +166,13 @@
       <div class="contact-inner">
         <h2 class="section-mega-title" data-i18n="contact.title">CONTACT</h2>
         <p class="contact-description" data-i18n="contact.description">Ai un proiect în minte? Hai să discutăm!</p>
-        <form class="contact-form" id="contactForm" action="mailto:contact@vladpanaitescu.com" method="POST" enctype="text/plain">
+        <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact" />
           <input type="text" name="name" class="contact-input" placeholder="Nume" data-i18n-placeholder="contact.name_placeholder" required />
+          <input type="email" name="email" class="contact-input" placeholder="Email" data-i18n-placeholder="contact.email_placeholder" required />
           <textarea name="message" class="contact-textarea" placeholder="Mesajul tău..." data-i18n-placeholder="contact.message_placeholder" rows="5" required></textarea>
           <button type="submit" class="btn-contact btn-contact-lg" data-i18n="contact.cta_button">TRIMITE UN MESAJ</button>
+          <p class="form-status" id="formStatus"></p>
         </form>
         <a href="mailto:contact@vladpanaitescu.com" class="contact-email">contact@vladpanaitescu.com</a>
       </div>

@@ -24,8 +24,11 @@ const translationData = {
     'contact.title': 'CONTACT',
     'contact.description': 'Ai un proiect în minte? Hai să discutăm!',
     'contact.name_placeholder': 'Nume',
+    'contact.email_placeholder': 'Email-ul tău',
     'contact.message_placeholder': 'Mesajul tău...',
     'contact.cta_button': 'TRIMITE UN MESAJ',
+    'contact.success': 'Mesajul a fost trimis cu succes! ✓',
+    'contact.error': 'Eroare la trimitere. Încearcă din nou.',
     'footer.rights': 'Toate drepturile rezervate.'
   },
   en: {
@@ -50,8 +53,11 @@ const translationData = {
     'contact.title': 'CONTACT',
     'contact.description': 'Have a project in mind? Let\'s talk!',
     'contact.name_placeholder': 'Name',
+    'contact.email_placeholder': 'Your email',
     'contact.message_placeholder': 'Your message...',
     'contact.cta_button': 'SEND A MESSAGE',
+    'contact.success': 'Message sent successfully! ✓',
+    'contact.error': 'Error sending. Please try again.',
     'footer.rights': 'All rights reserved.'
   },
   de: {
@@ -76,8 +82,11 @@ const translationData = {
     'contact.title': 'KONTAKT',
     'contact.description': 'Hast du ein Projekt im Kopf? Lass uns reden!',
     'contact.name_placeholder': 'Name',
+    'contact.email_placeholder': 'Deine E-Mail',
     'contact.message_placeholder': 'Deine Nachricht...',
     'contact.cta_button': 'NACHRICHT SENDEN',
+    'contact.success': 'Nachricht erfolgreich gesendet! ✓',
+    'contact.error': 'Fehler beim Senden. Bitte versuche es erneut.',
     'footer.rights': 'Alle Rechte vorbehalten.'
   },
   it: {
@@ -102,8 +111,11 @@ const translationData = {
     'contact.title': 'CONTATTO',
     'contact.description': 'Hai un progetto in mente? Parliamone!',
     'contact.name_placeholder': 'Nome',
+    'contact.email_placeholder': 'La tua email',
     'contact.message_placeholder': 'Il tuo messaggio...',
     'contact.cta_button': 'INVIA UN MESSAGGIO',
+    'contact.success': 'Messaggio inviato con successo! ✓',
+    'contact.error': 'Errore durante l\'invio. Riprova.',
     'footer.rights': 'Tutti i diritti riservati.'
   },
   fr: {
@@ -128,13 +140,19 @@ const translationData = {
     'contact.title': 'CONTACT',
     'contact.description': 'Vous avez un projet en tête ? Parlons-en !',
     'contact.name_placeholder': 'Nom',
+    'contact.email_placeholder': 'Votre email',
     'contact.message_placeholder': 'Votre message...',
     'contact.cta_button': 'ENVOYER UN MESSAGE',
+    'contact.success': 'Message envoyé avec succès ! ✓',
+    'contact.error': 'Erreur lors de l\'envoi. Veuillez réessayer.',
     'footer.rights': 'Tous droits réservés.'
   }
 };
 
 let currentLang = 'ro';
+
+export function getCurrentLang() { return currentLang; }
+export { translationData };
 
 export function initI18n() {
   const saved = localStorage.getItem('vp-lang');
