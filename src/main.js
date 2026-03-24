@@ -527,12 +527,16 @@ function initMobileHorizontalSections() {
   brandsSection.style.overflow = 'visible';
   gallerySection.style.overflow = 'visible';
 
-  // Wait for CSS to apply (cards resize to 280px inside sticky container)
+  // GPU hints
+  [brandsRow, galleryRow1, galleryRow2].forEach(el => {
+    el.style.willChange = 'transform';
+  });
+
+  // Wait for CSS to apply
   requestAnimationFrame(() => {
   requestAnimationFrame(() => {
     const viewportWidth = window.innerWidth;
 
-    // Now measure scroll distances with correct card sizes
     const brandsWidth = brandsRow.scrollWidth;
     const brandsScrollDist = Math.max(0, Math.min(brandsWidth / 3, brandsWidth - viewportWidth));
 
@@ -540,50 +544,46 @@ function initMobileHorizontalSections() {
     const g2ScrollDist = Math.max(0, galleryRow2.scrollWidth - viewportWidth);
 
     const maxScrollDist = Math.max(brandsScrollDist, g1ScrollDist, g2ScrollDist);
-
-    // Set wrapper height for vertical scroll space
     wrapper.style.height = `${maxScrollDist + window.innerHeight}px`;
 
-    // Row configs
     const rows = [
-      { el: brandsRow, distance: brandsScrollDist, dir: 'left' },
-      { el: galleryRow1, distance: g1ScrollDist, dir: 'right' },
-      { el: galleryRow2, distance: g2ScrollDist, dir: 'left' },
+      { el: brandsRow, distance: brandsScrollDist, dir: 'left', current: 0, target: 0 },
+      { el: galleryRow1, distance: g1ScrollDist, dir: 'right', current: -g1ScrollDist, target: -g1ScrollDist },
+      { el: galleryRow2, distance: g2ScrollDist, dir: 'left', current: 0, target: 0 },
     ];
 
     // Set initial positions
-    rows.forEach(({ el, distance, dir }) => {
-      if (dir === 'right') el.style.transform = `translateX(${-distance}px)`;
+    rows.forEach(({ el, current }) => {
+      el.style.transform = `translate3d(${current}px, 0, 0)`;
     });
 
-    // Scroll handler
-    let ticking = false;
-    function update() {
+    const lerp = 0.08; // Smoothing factor (lower = smoother but slower)
+
+    // Continuous animation loop
+    function animate() {
       const rect = wrapper.getBoundingClientRect();
       const scrollable = wrapper.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) { ticking = false; return; }
 
-      const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+      if (scrollable > 0) {
+        const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
 
-      rows.forEach(({ el, distance, dir }) => {
-        if (dir === 'left') {
-          el.style.transform = `translateX(${-progress * distance}px)`;
-        } else {
-          el.style.transform = `translateX(${-distance + progress * distance}px)`;
-        }
-      });
+        rows.forEach(row => {
+          if (row.dir === 'left') {
+            row.target = -progress * row.distance;
+          } else {
+            row.target = -row.distance + progress * row.distance;
+          }
 
-      ticking = false;
+          // Lerp toward target
+          row.current += (row.target - row.current) * lerp;
+          row.el.style.transform = `translate3d(${row.current}px, 0, 0)`;
+        });
+      }
+
+      requestAnimationFrame(animate);
     }
 
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    update();
+    animate();
   });
   });
 
@@ -593,6 +593,7 @@ function initMobileHorizontalSections() {
   if (!reviewsSection || !reviewsTrack) return;
 
   reviewsSection.style.overflow = 'visible';
+  reviewsTrack.style.willChange = 'transform';
 
   const rWrapper = document.createElement('div');
   rWrapper.className = 'mobile-hscroll-wrapper';
@@ -603,31 +604,29 @@ function initMobileHorizontalSections() {
   rSticky.appendChild(reviewsSection);
   rWrapper.appendChild(rSticky);
 
-  // Measure after CSS applies
   requestAnimationFrame(() => {
   requestAnimationFrame(() => {
     const rScrollDist = Math.max(0, reviewsTrack.scrollWidth - window.innerWidth);
     rWrapper.style.height = `${rScrollDist + window.innerHeight}px`;
 
-    let rTicking = false;
-    function rUpdate() {
+    let rCurrent = 0;
+
+    function rAnimate() {
       const rect = rWrapper.getBoundingClientRect();
       const scrollable = rWrapper.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) { rTicking = false; return; }
 
-      const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
-      reviewsTrack.style.transform = `translateX(${-progress * rScrollDist}px)`;
-      rTicking = false;
+      if (scrollable > 0) {
+        const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+        const rTarget = -progress * rScrollDist;
+        rCurrent += (rTarget - rCurrent) * lerp;
+        reviewsTrack.style.transform = `translate3d(${rCurrent}px, 0, 0)`;
+      }
+
+      requestAnimationFrame(rAnimate);
     }
 
-    window.addEventListener('scroll', () => {
-      if (!rTicking) {
-        requestAnimationFrame(rUpdate);
-        rTicking = true;
-      }
-    }, { passive: true });
-
-    rUpdate();
+    const lerp = 0.08;
+    rAnimate();
   });
   });
 }

@@ -1310,4 +1310,10 @@ body.menu-open {
     height: auto;
     aspect-ratio: 3 / 2;
   }
+
+  .mobile-sticky-container .review-card {
+    width: 260px;
+    min-height: 160px;
+    padding: 18px;
+  }
 }
