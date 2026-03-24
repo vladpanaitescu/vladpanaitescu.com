@@ -591,7 +591,7 @@ body.menu-open {
   align-items: stretch;
   padding: 28px;
   background: var(--bg-dark);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 24px;
   position: sticky;
   top: calc(80px + var(--i, 0) * 80px);
@@ -634,7 +634,7 @@ body.menu-open {
 .project-number {
   font-family: var(--font-display);
   font-size: clamp(120px, 15vw, 210px);
-  color: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.12);
   line-height: 0.8;
   letter-spacing: -6px;
   display: flex;
@@ -645,7 +645,7 @@ body.menu-open {
 }
 
 .project-card:hover .project-number {
-  color: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 255, 255, 1) !important;
 }
 
 .project-title {
@@ -653,12 +653,13 @@ body.menu-open {
   font-size: clamp(20px, 2.5vw, 28px);
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.2);
-  transition: color 0.5s ease;
+  color: var(--text-white);
+  transition: color 0.5s ease, transform 0.6s var(--ease-out);
 }
 
 .project-card:hover .project-title {
   color: var(--text-white) !important;
+  transform: scale(1.05);
 }
 
 .project-description {
@@ -683,7 +684,7 @@ body.menu-open {
   width: auto;
   object-fit: contain;
   transition: transform 0.6s var(--ease-out), opacity 0.5s ease;
-  opacity: 0.2;
+  opacity: 1;
 }
 
 .project-card:hover .project-card-img img {
@@ -1279,5 +1280,34 @@ body.menu-open {
   .gallery-card {
     width: 300px;
     height: 200px;
+  }
+
+  .mobile-hscroll-wrapper {
+    position: relative;
+  }
+
+  .mobile-sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .mobile-sticky-container .brands-scroll {
+    padding: 10px 0 8px;
+  }
+
+  .mobile-sticky-container .gallery-scroll {
+    padding: 8px 0;
+    gap: 12px;
+  }
+
+  .mobile-sticky-container .gallery-card {
+    width: 92vw;
+    height: auto;
+    aspect-ratio: 3 / 2;
   }
 }

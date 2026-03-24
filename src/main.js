@@ -23,7 +23,7 @@ const reviews = [
 const brands = [
   'BGS', 'ShopBGS', 'Origo', 'Brewzeus', 'Absolut', 'Havana',
   "Ballantine's", 'Chivas', 'Steam Coffee Shop', 'Trofic Food',
-  'Huawei', 'SpaceDev', 'Primăria Oradea', 'Napoleon Games', 'Superbet',
+  'Huawei', 'SpaceDev', 'Primăria Oradea', 'Napoleon Games', 'F64',
   'Plative', 'carVertical', 'Magna Tuning'
 ];
 
@@ -51,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initReviewsDrag();
   initContactForm();
   initAboutTextFade();
-  initServiceCardsFade();
+  initMobileHorizontalSections();
+
 
   // Wait for all assets then reveal
   function revealSite() {
@@ -165,6 +166,7 @@ function initScrollDrivenRows() {
   // Row 1 starts further left, Row 2 starts further right
   const initialOffset1 = -800;
   const initialOffset2 = 0;
+  const isMobile = window.innerWidth <= 768;
 
   let ticking = false;
 
@@ -172,23 +174,23 @@ function initScrollDrivenRows() {
     const scrollY = window.scrollY;
     const tilt = -2;
 
-    // Brands: scroll LEFT
-    if (brandsRow) {
+    // Brands: scroll LEFT (desktop only, mobile uses horizontal scroll)
+    if (brandsRow && !isMobile) {
       brandsRow.style.transform = `translateX(${scrollY * -0.5}px) rotate(${tilt}deg)`;
     }
 
-    // Gallery row 1: scroll RIGHT
-    if (galleryRow1) {
+    // Gallery row 1: scroll RIGHT (desktop only)
+    if (galleryRow1 && !isMobile) {
       galleryRow1.style.transform = `translateX(${initialOffset1 + scrollY * 0.4}px) rotate(${tilt}deg)`;
     }
 
-    // Gallery row 2: scroll LEFT
-    if (galleryRow2) {
+    // Gallery row 2: scroll LEFT (desktop only)
+    if (galleryRow2 && !isMobile) {
       galleryRow2.style.transform = `translateX(${initialOffset2 + scrollY * -0.3}px) rotate(${tilt}deg)`;
     }
 
-    // Reviews: scroll LEFT relative to section position + user drag offset
-    if (reviewsTrack) {
+    // Reviews: scroll LEFT relative to section position + user drag offset (desktop only)
+    if (reviewsTrack && !isMobile) {
       const reviewsSection = reviewsTrack.closest('.reviews');
       const sectionTop = reviewsSection.getBoundingClientRect().top + scrollY;
       const relativeScroll = scrollY - sectionTop + window.innerHeight;
@@ -211,7 +213,8 @@ function initScrollDrivenRows() {
       
       // Fade in brands title
       brandsTitle.style.opacity = progress;
-      brandsTitle.style.transform = `translateY(${(1 - progress) * 20}px) rotate(-2deg)`;
+      const titleRotate = isMobile ? '' : ' rotate(-2deg)';
+      brandsTitle.style.transform = `translateY(${(1 - progress) * 20}px)${titleRotate}`;
     }
 
     ticking = false;
@@ -497,50 +500,134 @@ function initAboutTextFade() {
   update();
 }
 
-// ===== SERVICE CARDS — SCROLL-DRIVEN FADE =====
-function initServiceCardsFade() {
-  const cards = Array.from(document.querySelectorAll('.project-card'));
-  if (!cards.length) return;
+// ===== MOBILE HORIZONTAL SCROLL — BRANDS & GALLERY =====
+function initMobileHorizontalSections() {
+  if (window.innerWidth > 768) return;
 
-  // Store natural positions (before sticky kicks in)
-  const positions = cards.map(card => {
-    let top = card.offsetTop;
-    let el = card.offsetParent;
-    while (el) { top += el.offsetTop; el = el.offsetParent; }
-    return top;
-  });
+  const brandsSection = document.getElementById('brands');
+  const gallerySection = document.getElementById('gallery');
+  const brandsRow = document.getElementById('brandsRow');
+  const galleryRow1 = document.getElementById('galleryRow1');
+  const galleryRow2 = document.getElementById('galleryRow2');
 
-  let ticking = false;
-  function update() {
-    const scrollY = window.scrollY;
-    const windowH = window.innerHeight;
+  if (!brandsSection || !gallerySection || !brandsRow || !galleryRow1 || !galleryRow2) return;
 
-    // Find active card: last card whose natural top has been scrolled past
-    let activeIdx = 0;
-    for (let i = 0; i < positions.length; i++) {
-      if (scrollY + windowH * 0.5 >= positions[i]) activeIdx = i;
+  // First: restructure DOM
+  const wrapper = document.createElement('div');
+  wrapper.className = 'mobile-hscroll-wrapper';
+  brandsSection.parentNode.insertBefore(wrapper, brandsSection);
+
+  const sticky = document.createElement('div');
+  sticky.className = 'mobile-sticky-container';
+
+  sticky.appendChild(brandsSection);
+  sticky.appendChild(gallerySection);
+  wrapper.appendChild(sticky);
+
+  brandsSection.style.overflow = 'visible';
+  gallerySection.style.overflow = 'visible';
+
+  // Wait for CSS to apply (cards resize to 280px inside sticky container)
+  requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    const viewportWidth = window.innerWidth;
+
+    // Now measure scroll distances with correct card sizes
+    const brandsWidth = brandsRow.scrollWidth;
+    const brandsScrollDist = Math.max(0, Math.min(brandsWidth / 3, brandsWidth - viewportWidth));
+
+    const g1ScrollDist = Math.max(0, galleryRow1.scrollWidth - viewportWidth);
+    const g2ScrollDist = Math.max(0, galleryRow2.scrollWidth - viewportWidth);
+
+    const maxScrollDist = Math.max(brandsScrollDist, g1ScrollDist, g2ScrollDist);
+
+    // Set wrapper height for vertical scroll space
+    wrapper.style.height = `${maxScrollDist + window.innerHeight}px`;
+
+    // Row configs
+    const rows = [
+      { el: brandsRow, distance: brandsScrollDist, dir: 'left' },
+      { el: galleryRow1, distance: g1ScrollDist, dir: 'right' },
+      { el: galleryRow2, distance: g2ScrollDist, dir: 'left' },
+    ];
+
+    // Set initial positions
+    rows.forEach(({ el, distance, dir }) => {
+      if (dir === 'right') el.style.transform = `translateX(${-distance}px)`;
+    });
+
+    // Scroll handler
+    let ticking = false;
+    function update() {
+      const rect = wrapper.getBoundingClientRect();
+      const scrollable = wrapper.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) { ticking = false; return; }
+
+      const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+
+      rows.forEach(({ el, distance, dir }) => {
+        if (dir === 'left') {
+          el.style.transform = `translateX(${-progress * distance}px)`;
+        } else {
+          el.style.transform = `translateX(${-distance + progress * distance}px)`;
+        }
+      });
+
+      ticking = false;
     }
 
-    cards.forEach((card, i) => {
-      const isActive = i === activeIdx;
-      const progress = isActive ? 1 : 0;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
 
-      card.style.borderColor = `rgba(255,255,255,${isActive ? 0.15 : 0.03})`;
-      const title = card.querySelector('.project-title');
-      if (title) title.style.color = `rgba(255,255,255,${isActive ? 1 : 0.2})`;
-      const num = card.querySelector('.project-number');
-      if (num) num.style.color = `rgba(255,255,255,${isActive ? 0.12 : 0.02})`;
-      card.querySelectorAll('.project-card-img img').forEach(img => {
-        img.style.opacity = isActive ? 1 : 0.2;
-      });
-    });
-    ticking = false;
-  }
+    update();
+  });
+  });
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(update); ticking = true; }
-  }, { passive: true });
+  // ===== REVIEWS — separate sticky block =====
+  const reviewsSection = document.querySelector('.reviews');
+  const reviewsTrack = document.getElementById('reviewsTrack');
+  if (!reviewsSection || !reviewsTrack) return;
 
-  // Delay initial update to let layout settle
-  setTimeout(update, 100);
+  reviewsSection.style.overflow = 'visible';
+
+  const rWrapper = document.createElement('div');
+  rWrapper.className = 'mobile-hscroll-wrapper';
+  reviewsSection.parentNode.insertBefore(rWrapper, reviewsSection);
+
+  const rSticky = document.createElement('div');
+  rSticky.className = 'mobile-sticky-container';
+  rSticky.appendChild(reviewsSection);
+  rWrapper.appendChild(rSticky);
+
+  // Measure after CSS applies
+  requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    const rScrollDist = Math.max(0, reviewsTrack.scrollWidth - window.innerWidth);
+    rWrapper.style.height = `${rScrollDist + window.innerHeight}px`;
+
+    let rTicking = false;
+    function rUpdate() {
+      const rect = rWrapper.getBoundingClientRect();
+      const scrollable = rWrapper.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) { rTicking = false; return; }
+
+      const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+      reviewsTrack.style.transform = `translateX(${-progress * rScrollDist}px)`;
+      rTicking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!rTicking) {
+        requestAnimationFrame(rUpdate);
+        rTicking = true;
+      }
+    }, { passive: true });
+
+    rUpdate();
+  });
+  });
 }
