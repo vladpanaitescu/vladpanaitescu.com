@@ -1297,12 +1297,20 @@ body.menu-open {
   }
 
   .mobile-sticky-container .brands-scroll {
-    padding: 10px 0 8px;
+    padding: 4px 0;
+  }
+
+  .mobile-sticky-container .brands-title {
+    margin-bottom: 16px;
+  }
+
+  .mobile-sticky-container .brands-row {
+    padding: 6px 0;
   }
 
   .mobile-sticky-container .gallery-scroll {
-    padding: 8px 0;
-    gap: 12px;
+    padding: 4px 0;
+    gap: 8px;
   }
 
   .mobile-sticky-container .gallery-card {
