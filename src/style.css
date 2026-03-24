@@ -491,11 +491,12 @@ body.menu-open {
   white-space: nowrap;
   text-transform: uppercase;
   flex-shrink: 0;
+  text-decoration: none;
   transition: color 0.3s;
 }
 
 .brand-item:hover {
-  color: var(--text-white);
+  color: var(--brand-color, var(--text-white));
 }
 
 /* ===== GALLERY SCROLL ROWS ===== */

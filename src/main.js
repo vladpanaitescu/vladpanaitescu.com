@@ -21,10 +21,24 @@ const reviews = [
 ];
 
 const brands = [
-  'BGS', 'ShopBGS', 'Origo', 'Brewzeus', 'Absolut', 'Havana',
-  "Ballantine's", 'Chivas', 'Steam Coffee Shop', 'Trofic Food',
-  'Huawei', 'SpaceDev', 'Primăria Oradea', 'Napoleon Games', 'F64',
-  'Plative', 'carVertical', 'Magna Tuning'
+  { name: 'BGS', url: 'https://bgs.ro', color: '#0066CC' },
+  { name: 'ShopBGS', url: 'https://shopbgs.ro', color: '#0066CC' },
+  { name: 'Origo', url: 'https://origocoffee.ro', color: '#C8956C' },
+  { name: 'Brewzeus', url: 'https://brewzeus.com', color: '#D4A843' },
+  { name: 'Absolut', url: 'https://www.absolut.com/en/', color: '#002F6C' },
+  { name: 'Havana', url: 'https://havana-club.com/en/', color: '#CC0000' },
+  { name: "Ballantine's", url: 'https://www.ballantines.com/en/', color: '#8B1A1A' },
+  { name: 'Chivas', url: 'https://www.chivas.com/en/', color: '#C5A355' },
+  { name: 'Steam Coffee Shop', url: 'https://www.facebook.com/SteamCoffeeShop/', color: '#6F4E37' },
+  { name: 'Trofic Food', url: 'https://www.facebook.com/TroficFood/', color: '#6EDDB8' },
+  { name: 'Huawei', url: 'https://huawei.ro', color: '#CF0A2C' },
+  { name: 'SpaceDev', url: 'https://spacedev.codes/en', color: '#7C4DFF' },
+  { name: 'Primăria Oradea', url: 'https://portal.parcari.oradea.ro', color: '#1976D2' },
+  { name: 'Napoleon Games', url: 'https://napoleongames.ro', color: '#3D0033' },
+  { name: 'F64', url: 'https://www.f64.ro', color: '#ED7D00' },
+  { name: 'Plative', url: 'https://plative.ro', color: '#2196F3' },
+  { name: 'carVertical', url: 'https://www.carvertical.com', color: '#0066FF' },
+  { name: 'Magna Tuning', url: 'https://www.magnatuning.com/ro/', color: '#E53935' },
 ];
 
 // ===== INIT =====
@@ -148,7 +162,9 @@ function initBrandsRow() {
   const shuffled = [...brands].sort(() => Math.random() - 0.5);
   // Triple for seamless scrolling
   const tripled = [...shuffled, ...shuffled, ...shuffled];
-  row.innerHTML = tripled.map(b => `<span class="brand-item">${b}</span>`).join('');
+  row.innerHTML = tripled.map(b =>
+    `<a href="${b.url}" target="_blank" rel="noopener" class="brand-item" style="--brand-color:${b.color}">${b.name}</a>`
+  ).join('');
 }
 
 // ===== SCROLL-DRIVEN HORIZONTAL MOVEMENT =====
