@@ -1294,6 +1294,19 @@ body.menu-open {
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
+    contain: layout style;
+  }
+
+  .mobile-sticky-container .scroll-row {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  .mobile-sticky-container .gallery-card {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
   }
 
   .mobile-sticky-container .brands-scroll {

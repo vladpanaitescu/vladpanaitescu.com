@@ -189,14 +189,14 @@ function initScrollDrivenRows() {
       galleryRow2.style.transform = `translateX(${initialOffset2 + scrollY * -0.3}px) rotate(${tilt}deg)`;
     }
 
-    // Reviews: scroll LEFT relative to section position + user drag offset (desktop only)
-    if (reviewsTrack && !isMobile) {
+    // Reviews: scroll LEFT relative to section position + user drag offset
+    if (reviewsTrack) {
       const reviewsSection = reviewsTrack.closest('.reviews');
       const sectionTop = reviewsSection.getBoundingClientRect().top + scrollY;
       const relativeScroll = scrollY - sectionTop + window.innerHeight;
       const dragOffset = parseFloat(reviewsTrack.dataset.dragOffset || 0);
       if (relativeScroll > 0) {
-        reviewsTrack.style.transform = `translateX(${200 + relativeScroll * -0.4 + dragOffset}px)`;
+        reviewsTrack.style.transform = `translateX(${16 + relativeScroll * -0.4 + dragOffset}px)`;
       }
     }
 
@@ -557,7 +557,7 @@ function initMobileHorizontalSections() {
       el.style.transform = `translate3d(${current}px, 0, 0)`;
     });
 
-    const lerp = 0.08; // Smoothing factor (lower = smoother but slower)
+    const lerp = 0.05; // Lower = smoother
 
     // Continuous animation loop
     function animate() {
@@ -584,49 +584,6 @@ function initMobileHorizontalSections() {
     }
 
     animate();
-  });
-  });
-
-  // ===== REVIEWS — separate sticky block =====
-  const reviewsSection = document.querySelector('.reviews');
-  const reviewsTrack = document.getElementById('reviewsTrack');
-  if (!reviewsSection || !reviewsTrack) return;
-
-  reviewsSection.style.overflow = 'visible';
-  reviewsTrack.style.willChange = 'transform';
-
-  const rWrapper = document.createElement('div');
-  rWrapper.className = 'mobile-hscroll-wrapper';
-  reviewsSection.parentNode.insertBefore(rWrapper, reviewsSection);
-
-  const rSticky = document.createElement('div');
-  rSticky.className = 'mobile-sticky-container';
-  rSticky.appendChild(reviewsSection);
-  rWrapper.appendChild(rSticky);
-
-  requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-    const rScrollDist = Math.max(0, reviewsTrack.scrollWidth - window.innerWidth);
-    rWrapper.style.height = `${rScrollDist + window.innerHeight}px`;
-
-    let rCurrent = 0;
-
-    function rAnimate() {
-      const rect = rWrapper.getBoundingClientRect();
-      const scrollable = rWrapper.offsetHeight - window.innerHeight;
-
-      if (scrollable > 0) {
-        const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
-        const rTarget = -progress * rScrollDist;
-        rCurrent += (rTarget - rCurrent) * lerp;
-        reviewsTrack.style.transform = `translate3d(${rCurrent}px, 0, 0)`;
-      }
-
-      requestAnimationFrame(rAnimate);
-    }
-
-    const lerp = 0.08;
-    rAnimate();
   });
   });
 }
