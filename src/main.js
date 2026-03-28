@@ -30,7 +30,6 @@ const brands = [
   { name: "Ballantine's", url: 'https://www.ballantines.com/en/', color: '#8B1A1A' },
   { name: 'Chivas', url: 'https://www.chivas.com/en/', color: '#C5A355' },
   { name: 'Steam Coffee Shop', url: 'https://www.facebook.com/SteamCoffeeShop/', color: '#6F4E37' },
-  { name: 'Trofic Food', url: 'https://www.facebook.com/TroficFood/', color: '#6EDDB8' },
   { name: 'Huawei', url: 'https://huawei.ro', color: '#CF0A2C' },
   { name: 'SpaceDev', url: 'https://spacedev.codes/en', color: '#7C4DFF' },
   { name: 'Primăria Oradea', url: 'https://portal.parcari.oradea.ro', color: '#1976D2' },
@@ -65,13 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initReviewsDrag();
   initContactForm();
   initAboutTextFade();
+  initCommunityCounters();
 
 
   // Wait for all assets then reveal
   function revealSite() {
     const loader = document.getElementById('loaderOverlay');
     if (loader) loader.classList.add('hidden');
-    
+
     setTimeout(() => {
       if (hero) { hero.style.transition = 'opacity 1s ease'; hero.style.opacity = '1'; }
       if (navbar) { navbar.style.transition = 'opacity 1s ease 0.3s'; navbar.style.opacity = '1'; }
@@ -221,11 +221,11 @@ function initScrollDrivenRows() {
       const avatarBottom = avatarRect.bottom;
       // Start transition when avatar is near top of viewport, complete faster
       const progress = Math.min(1, Math.max(0, (200 - avatarBottom) / 200));
-      
+
       // Fade out hero bottom row
       heroBottomRow.style.opacity = 1 - progress;
       heroBottomRow.style.transform = `translateY(${-progress * 30}px) scale(${1 - progress * 0.1})`;
-      
+
       // Fade in brands title
       brandsTitle.style.opacity = progress;
       brandsTitle.style.transform = `translateY(${(1 - progress) * 20}px) rotate(-2deg)`;
@@ -512,4 +512,55 @@ function initAboutTextFade() {
     if (!ticking) { requestAnimationFrame(update); ticking = true; }
   }, { passive: true });
   update();
+}
+
+// ===== COMMUNITY COUNTERS =====
+function initCommunityCounters() {
+  const counters = document.querySelectorAll('.stat-number');
+  if (!counters.length) return;
+
+  function formatNumber(n) {
+    return n.toLocaleString('ro-RO');
+  }
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 2500;
+    const start = performance.now();
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOutQuart
+      const eased = 1 - Math.pow(1 - progress, 4);
+      const current = Math.floor(eased * target);
+      el.textContent = formatNumber(current);
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = formatNumber(target);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => observer.observe(c));
+
+  // Gradient fade-in
+  const section = document.getElementById('community');
+  if (section) {
+    const sectionObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) section.classList.add('community--visible');
+      });
+    }, { threshold: 0.15 });
+    sectionObs.observe(section);
+  }
 }

@@ -3,7 +3,7 @@ const CODES = { ro: 'RO', en: 'EN', de: 'DE', it: 'IT', fr: 'FR' };
 
 const translationData = {
   ro: {
-    'nav.about': 'DESPRE NOI',
+    'nav.about': 'DESPRE MINE',
     'nav.brands': 'CLIENȚI',
     'nav.projects': 'PROIECTE',
     'nav.contact': 'CONTACT',
@@ -11,9 +11,9 @@ const translationData = {
     'hero.description': 'Un Graphic Designer pasionat de crearea unor identități vizuale memorabile și experiențe digitale care inspiră 🎨',
     'hero.cta': 'CONTACTEAZĂ-MĂ',
     'projects.title': 'PROIECTE',
-    'about.title': 'DESPRE NOI',
+    'about.title': 'DESPRE MINE',
     'about.line1': 'Fiecare proiect începe cu o viziune.',
-    'about.line2': 'Imaginăm conceptul, îl creăm vizual, evaluăm impactul și rafinăm până la perfecțiune.',
+    'about.line2': 'Imaginez conceptul, îl creez vizual, evaluez impactul și rafinez până la perfecțiune.',
     'about.line3': 'E un proces continuu care transformă ideile în realitate — mereu în mișcare, mereu în evoluție.',
     'about.line4': '',
     'about.line5': 'Hai să pornim un nou ciclu împreună.',
@@ -29,10 +29,14 @@ const translationData = {
     'contact.cta_button': 'TRIMITE UN MESAJ',
     'contact.success': 'Mesajul a fost trimis cu succes! ✓',
     'contact.error': 'Eroare la trimitere. Încearcă din nou.',
-    'footer.rights': 'Toate drepturile rezervate.'
+    'footer.rights': 'Toate drepturile rezervate.',
+    'community.title': 'COMUNITATE',
+    'community.subtitle': 'Am creat cea mai mare comunitate multi-canal de pasionați auto.',
+    'community.members': 'Followeri',
+    'community.views': 'Vizualizări'
   },
   en: {
-    'nav.about': 'ABOUT US',
+    'nav.about': 'ABOUT ME',
     'nav.brands': 'CLIENTS',
     'nav.projects': 'PROJECTS',
     'nav.contact': 'CONTACT',
@@ -40,9 +44,9 @@ const translationData = {
     'hero.description': 'A Graphic Designer passionate about crafting memorable visual identities and inspiring digital experiences 🎨',
     'hero.cta': 'CONTACT ME',
     'projects.title': 'PROJECTS',
-    'about.title': 'ABOUT US',
+    'about.title': 'ABOUT ME',
     'about.line1': 'Every project starts with a vision.',
-    'about.line2': 'We imagine the concept, create it visually, assess its impact, and refine it to perfection.',
+    'about.line2': 'I imagine the concept, create it visually, assess its impact, and refine it to perfection.',
     'about.line3': 'It\'s a continuous process that turns ideas into reality — always moving, always evolving.',
     'about.line4': '',
     'about.line5': 'Let\'s start a new cycle together.',
@@ -58,10 +62,14 @@ const translationData = {
     'contact.cta_button': 'SEND A MESSAGE',
     'contact.success': 'Message sent successfully! ✓',
     'contact.error': 'Error sending. Please try again.',
-    'footer.rights': 'All rights reserved.'
+    'footer.rights': 'All rights reserved.',
+    'community.title': 'COMMUNITY',
+    'community.subtitle': 'I created the biggest multi-channel community for car enthusiasts.',
+    'community.members': 'Followers',
+    'community.views': 'Views'
   },
   de: {
-    'nav.about': 'ÜBER UNS',
+    'nav.about': 'ÜBER MICH',
     'nav.brands': 'KUNDEN',
     'nav.projects': 'PROJEKTE',
     'nav.contact': 'KONTAKT',
@@ -69,9 +77,9 @@ const translationData = {
     'hero.description': 'Ein Grafikdesigner mit Leidenschaft für einprägsame visuelle Identitäten und inspirierende digitale Erlebnisse 🎨',
     'hero.cta': 'KONTAKTIERE MICH',
     'projects.title': 'PROJEKTE',
-    'about.title': 'ÜBER UNS',
+    'about.title': 'ÜBER MICH',
     'about.line1': 'Jedes Projekt beginnt mit einer Vision.',
-    'about.line2': 'Wir stellen uns das Konzept vor, gestalten es visuell, bewerten die Wirkung und verfeinern es bis zur Perfektion.',
+    'about.line2': 'Ich stelle mir das Konzept vor, gestalte es visuell, bewerte die Wirkung und verfeinere es bis zur Perfektion.',
     'about.line3': 'Ein kontinuierlicher Prozess, der Ideen in Realität verwandelt — immer in Bewegung, immer in Entwicklung.',
     'about.line4': '',
     'about.line5': 'Lasst uns einen neuen Zyklus starten.',
@@ -87,10 +95,14 @@ const translationData = {
     'contact.cta_button': 'NACHRICHT SENDEN',
     'contact.success': 'Nachricht erfolgreich gesendet! ✓',
     'contact.error': 'Fehler beim Senden. Bitte versuche es erneut.',
-    'footer.rights': 'Alle Rechte vorbehalten.'
+    'footer.rights': 'Alle Rechte vorbehalten.',
+    'community.title': 'GEMEINSCHAFT',
+    'community.subtitle': 'Ich habe die größte Multi-Channel-Community für Autobegeisterte geschaffen.',
+    'community.members': 'Follower',
+    'community.views': 'Aufrufe'
   },
   it: {
-    'nav.about': 'CHI SIAMO',
+    'nav.about': 'CHI SONO',
     'nav.brands': 'CLIENTI',
     'nav.projects': 'PROGETTI',
     'nav.contact': 'CONTATTO',
@@ -98,9 +110,9 @@ const translationData = {
     'hero.description': 'Un Graphic Designer appassionato nel creare identità visive memorabili ed esperienze digitali che ispirano 🎨',
     'hero.cta': 'CONTATTAMI',
     'projects.title': 'PROGETTI',
-    'about.title': 'CHI SIAMO',
+    'about.title': 'CHI SONO',
     'about.line1': 'Ogni progetto inizia con una visione.',
-    'about.line2': 'Immaginiamo il concetto, lo creiamo visivamente, ne valutiamo l\'impatto e lo perfezioniamo.',
+    'about.line2': 'Immagino il concetto, lo creo visivamente, ne valuto l\'impatto e lo perfeziono.',
     'about.line3': 'È un processo continuo che trasforma le idee in realtà — sempre in movimento, sempre in evoluzione.',
     'about.line4': '',
     'about.line5': 'Iniziamo un nuovo ciclo insieme.',
@@ -116,10 +128,14 @@ const translationData = {
     'contact.cta_button': 'INVIA UN MESSAGGIO',
     'contact.success': 'Messaggio inviato con successo! ✓',
     'contact.error': 'Errore durante l\'invio. Riprova.',
-    'footer.rights': 'Tutti i diritti riservati.'
+    'footer.rights': 'Tutti i diritti riservati.',
+    'community.title': 'COMUNITÀ',
+    'community.subtitle': 'Ho creato la più grande comunità multi-canale per appassionati di auto.',
+    'community.members': 'Follower',
+    'community.views': 'Visualizzazioni'
   },
   fr: {
-    'nav.about': 'À PROPOS DE NOUS',
+    'nav.about': 'À PROPOS DE MOI',
     'nav.brands': 'CLIENTS',
     'nav.projects': 'PROJETS',
     'nav.contact': 'CONTACT',
@@ -127,9 +143,9 @@ const translationData = {
     'hero.description': 'Un Graphic Designer passionné par la création d\'identités visuelles mémorables et d\'expériences numériques inspirantes 🎨',
     'hero.cta': 'CONTACTEZ-MOI',
     'projects.title': 'PROJETS',
-    'about.title': 'À PROPOS DE NOUS',
+    'about.title': 'À PROPOS DE MOI',
     'about.line1': 'Chaque projet commence par une vision.',
-    'about.line2': 'Nous imaginons le concept, le créons visuellement, évaluons son impact et le peaufinons jusqu\'à la perfection.',
+    'about.line2': 'J\'imagine le concept, le crée visuellement, évalue son impact et le peaufine jusqu\'à la perfection.',
     'about.line3': 'C\'est un processus continu qui transforme les idées en réalité — toujours en mouvement, toujours en évolution.',
     'about.line4': '',
     'about.line5': 'Lançons un nouveau cycle ensemble.',
@@ -145,7 +161,11 @@ const translationData = {
     'contact.cta_button': 'ENVOYER UN MESSAGE',
     'contact.success': 'Message envoyé avec succès ! ✓',
     'contact.error': 'Erreur lors de l\'envoi. Veuillez réessayer.',
-    'footer.rights': 'Tous droits réservés.'
+    'footer.rights': 'Tous droits réservés.',
+    'community.title': 'COMMUNAUTÉ',
+    'community.subtitle': 'J\'ai créé la plus grande communauté multi-canal de passionnés d\'automobile.',
+    'community.members': 'Abonnés',
+    'community.views': 'Vues'
   }
 };
 
