@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initReviewsDrag();
   initContactForm();
   initAboutTextFade();
-  initMobileHorizontalSections();
 
 
   // Wait for all assets then reveal
@@ -190,18 +189,18 @@ function initScrollDrivenRows() {
     const scrollY = window.scrollY;
     const tilt = -2;
 
-    // Brands: scroll LEFT (desktop only, mobile uses horizontal scroll)
-    if (brandsRow && !isMobile) {
+    // Brands: scroll LEFT
+    if (brandsRow) {
       brandsRow.style.transform = `translateX(${scrollY * -0.5}px) rotate(${tilt}deg)`;
     }
 
-    // Gallery row 1: scroll RIGHT (desktop only)
-    if (galleryRow1 && !isMobile) {
+    // Gallery row 1: scroll RIGHT
+    if (galleryRow1) {
       galleryRow1.style.transform = `translateX(${initialOffset1 + scrollY * 0.4}px) rotate(${tilt}deg)`;
     }
 
-    // Gallery row 2: scroll LEFT (desktop only)
-    if (galleryRow2 && !isMobile) {
+    // Gallery row 2: scroll LEFT
+    if (galleryRow2) {
       galleryRow2.style.transform = `translateX(${initialOffset2 + scrollY * -0.3}px) rotate(${tilt}deg)`;
     }
 
@@ -229,8 +228,7 @@ function initScrollDrivenRows() {
       
       // Fade in brands title
       brandsTitle.style.opacity = progress;
-      const titleRotate = isMobile ? '' : ' rotate(-2deg)';
-      brandsTitle.style.transform = `translateY(${(1 - progress) * 20}px)${titleRotate}`;
+      brandsTitle.style.transform = `translateY(${(1 - progress) * 20}px) rotate(-2deg)`;
     }
 
     ticking = false;
@@ -514,92 +512,4 @@ function initAboutTextFade() {
     if (!ticking) { requestAnimationFrame(update); ticking = true; }
   }, { passive: true });
   update();
-}
-
-// ===== MOBILE HORIZONTAL SCROLL — BRANDS & GALLERY =====
-function initMobileHorizontalSections() {
-  if (window.innerWidth > 768) return;
-
-  const brandsSection = document.getElementById('brands');
-  const gallerySection = document.getElementById('gallery');
-  const brandsRow = document.getElementById('brandsRow');
-  const galleryRow1 = document.getElementById('galleryRow1');
-  const galleryRow2 = document.getElementById('galleryRow2');
-
-  if (!brandsSection || !gallerySection || !brandsRow || !galleryRow1 || !galleryRow2) return;
-
-  // First: restructure DOM
-  const wrapper = document.createElement('div');
-  wrapper.className = 'mobile-hscroll-wrapper';
-  brandsSection.parentNode.insertBefore(wrapper, brandsSection);
-
-  const sticky = document.createElement('div');
-  sticky.className = 'mobile-sticky-container';
-
-  sticky.appendChild(brandsSection);
-  sticky.appendChild(gallerySection);
-  wrapper.appendChild(sticky);
-
-  brandsSection.style.overflow = 'visible';
-  gallerySection.style.overflow = 'visible';
-
-  // GPU hints
-  [brandsRow, galleryRow1, galleryRow2].forEach(el => {
-    el.style.willChange = 'transform';
-  });
-
-  // Wait for CSS to apply
-  requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-    const viewportWidth = window.innerWidth;
-
-    const brandsWidth = brandsRow.scrollWidth;
-    const brandsScrollDist = Math.max(0, Math.min(brandsWidth / 3, brandsWidth - viewportWidth));
-
-    const g1ScrollDist = Math.max(0, galleryRow1.scrollWidth - viewportWidth);
-    const g2ScrollDist = Math.max(0, galleryRow2.scrollWidth - viewportWidth);
-
-    const maxScrollDist = Math.max(brandsScrollDist, g1ScrollDist, g2ScrollDist);
-    wrapper.style.height = `${maxScrollDist + window.innerHeight}px`;
-
-    const rows = [
-      { el: brandsRow, distance: brandsScrollDist, dir: 'left', current: 0, target: 0 },
-      { el: galleryRow1, distance: g1ScrollDist, dir: 'right', current: -g1ScrollDist, target: -g1ScrollDist },
-      { el: galleryRow2, distance: g2ScrollDist, dir: 'left', current: 0, target: 0 },
-    ];
-
-    // Set initial positions
-    rows.forEach(({ el, current }) => {
-      el.style.transform = `translate3d(${current}px, 0, 0)`;
-    });
-
-    const lerp = 0.05; // Lower = smoother
-
-    // Continuous animation loop
-    function animate() {
-      const rect = wrapper.getBoundingClientRect();
-      const scrollable = wrapper.offsetHeight - window.innerHeight;
-
-      if (scrollable > 0) {
-        const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
-
-        rows.forEach(row => {
-          if (row.dir === 'left') {
-            row.target = -progress * row.distance;
-          } else {
-            row.target = -row.distance + progress * row.distance;
-          }
-
-          // Lerp toward target
-          row.current += (row.target - row.current) * lerp;
-          row.el.style.transform = `translate3d(${row.current}px, 0, 0)`;
-        });
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-  });
-  });
 }
