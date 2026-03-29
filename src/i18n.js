@@ -31,7 +31,7 @@ const translationData = {
     'contact.error': 'Eroare la trimitere. Încearcă din nou.',
     'footer.rights': 'Toate drepturile rezervate.',
     'community.title': 'COMUNITATE',
-    'community.subtitle': 'Am creat cea mai mare comunitate multi-canal de pasionați auto.',
+    'community.subtitle': 'Descoperă una dintre cele mai mari comunități multi-canal de pasionați auto din lume, creată chiar de mine.',
     'community.members': 'Followeri',
     'community.views': 'Vizualizări'
   },
@@ -64,7 +64,7 @@ const translationData = {
     'contact.error': 'Error sending. Please try again.',
     'footer.rights': 'All rights reserved.',
     'community.title': 'COMMUNITY',
-    'community.subtitle': 'I created the biggest multi-channel community for car enthusiasts.',
+    'community.subtitle': 'Check out one of the world\'s largest multi-channel communities for car enthusiasts, created by yours truly.',
     'community.members': 'Followers',
     'community.views': 'Views'
   },
@@ -97,7 +97,7 @@ const translationData = {
     'contact.error': 'Fehler beim Senden. Bitte versuche es erneut.',
     'footer.rights': 'Alle Rechte vorbehalten.',
     'community.title': 'GEMEINSCHAFT',
-    'community.subtitle': 'Ich habe die größte Multi-Channel-Community für Autobegeisterte geschaffen.',
+    'community.subtitle': 'Entdecke eine der weltweit größten Multi-Channel-Communitys für Autobegeisterte, gegründet von mir persönlich.',
     'community.members': 'Follower',
     'community.views': 'Aufrufe'
   },
@@ -130,7 +130,7 @@ const translationData = {
     'contact.error': 'Errore durante l\'invio. Riprova.',
     'footer.rights': 'Tutti i diritti riservati.',
     'community.title': 'COMUNITÀ',
-    'community.subtitle': 'Ho creato la più grande comunità multi-canale per appassionati di auto.',
+    'community.subtitle': 'Scopri una delle più grandi comunità multi-canale al mondo per appassionati di auto, creata dal sottoscritto.',
     'community.members': 'Follower',
     'community.views': 'Visualizzazioni'
   },
@@ -163,13 +163,13 @@ const translationData = {
     'contact.error': 'Erreur lors de l\'envoi. Veuillez réessayer.',
     'footer.rights': 'Tous droits réservés.',
     'community.title': 'COMMUNAUTÉ',
-    'community.subtitle': 'J\'ai créé la plus grande communauté multi-canal de passionnés d\'automobile.',
+    'community.subtitle': 'Découvrez l\'une des plus grandes communautés multi-canal au monde pour les passionnés d\'automobile, créée par votre serviteur.',
     'community.members': 'Abonnés',
     'community.views': 'Vues'
   }
 };
 
-let currentLang = 'ro';
+let currentLang = 'en';
 
 export function getCurrentLang() { return currentLang; }
 export { translationData };
