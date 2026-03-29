@@ -1365,11 +1365,11 @@ body.menu-open {
   }
 
   .avatar-container {
-    animation: avatarFloatY 11s ease-in-out infinite;
+    animation: avatarFloatY 18s ease-in-out infinite;
   }
 
   .avatar-3d {
-    animation: avatarFloatX 13s ease-in-out infinite;
+    animation: avatarFloatX 22s ease-in-out infinite;
   }
 
   .hero-avatar-zone {
@@ -1380,6 +1380,7 @@ body.menu-open {
     flex-direction: column;
     align-items: center;
     gap: 24px;
+    bottom: 100px;
   }
 
   .section-mega-title {
