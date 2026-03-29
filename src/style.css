@@ -776,7 +776,7 @@ body.menu-open {
 /* Heart — bottom left */
 .floating-obj--4 {
   bottom: -18%;
-  left: -2%;
+  left: -22%;
   width: 360px;
   height: 360px;
 }
@@ -968,74 +968,102 @@ body.menu-open {
 
 /* ===== COMMUNITY ===== */
 .community {
-  padding: 120px 0;
   position: relative;
   z-index: 20;
   background: var(--bg-dark);
-  overflow: hidden;
+  padding: 60px 24px;
 }
 
+.community-bg-img {
+  position: absolute;
+  inset: 0;
+  background: url('/Images/new-carspotting-bg.jpeg') center center / cover no-repeat;
+  z-index: 0;
+  border-radius: 20px;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.community:hover .community-bg-img {
+  transform: scale(1.05);
+}
+
+/* Dark overlay for text readability */
 .community::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, 
-    rgba(10, 10, 15, 1) 0%,
-    rgba(30, 50, 140, 0.4) 30%,
-    rgba(60, 30, 150, 0.35) 50%,
-    rgba(30, 50, 140, 0.4) 70%,
-    rgba(10, 10, 15, 1) 100%
-  );
-  opacity: 0;
-  transition: opacity 1.2s ease;
-  z-index: 0;
-}
-
-.community.community--visible::after {
-  opacity: 1;
-}
-
-.community-inner {
-  position: relative;
+  background: rgba(0, 0, 0, 0.55);
   z-index: 1;
+  border-radius: 20px;
 }
 
-.community::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 3px;
-  background: linear-gradient(90deg, #1877F2, #42b883, #1877F2);
-  border-radius: 2px;
-}
-
-.community-inner {
-  max-width: 800px;
+/* Card wrapper */
+.community {
+  max-width: 1600px;
   margin: 0 auto;
-  text-align: center;
+  aspect-ratio: 16 / 9;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.4s var(--ease-out), border-color 0.5s ease;
+}
+
+.community:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 -4px 50px rgba(0, 0, 0, 0.7);
+}
+
+
+
+/* Content */
+.community-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
   padding: 0 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .community-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 900;
+  color: var(--text-white);
+  letter-spacing: 4px;
+  line-height: 1;
   margin-bottom: 16px;
   white-space: nowrap;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.6s var(--ease-out);
 }
 
 .community-subtitle {
-  font-size: clamp(16px, 2vw, 20px);
+  font-size: clamp(15px, 1.6vw, 18px);
   color: var(--text-gray);
-  margin-bottom: 60px;
-  line-height: 1.6;
+  margin-bottom: 48px;
+  line-height: 1.7;
+  max-width: 460px;
+  transition: color 0.5s ease;
+}
+
+.community:hover .community-subtitle {
+  color: var(--text-white);
 }
 
 .community-stats {
   display: flex;
   justify-content: center;
-  gap: 80px;
-  margin-bottom: 50px;
+  gap: 48px;
+  margin-bottom: 32px;
 }
 
 .community-stat {
@@ -1046,42 +1074,41 @@ body.menu-open {
 
 .stat-number {
   font-family: var(--font-display);
-  font-size: clamp(48px, 8vw, 96px);
+  font-size: clamp(36px, 4vw, 56px);
   font-weight: 900;
-  letter-spacing: -2px;
-  background: linear-gradient(135deg, #1877F2, #42b883);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -1px;
+  color: #fff;
   line-height: 1;
 }
 
 .stat-suffix {
   font-family: var(--font-display);
-  font-size: clamp(32px, 5vw, 64px);
+  font-size: clamp(24px, 3vw, 40px);
   font-weight: 900;
-  background: linear-gradient(135deg, #1877F2, #42b883);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
   line-height: 1;
-  margin-left: 4px;
+  margin-left: 2px;
 }
 
 .stat-label {
-  font-size: 14px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: var(--text-gray);
-  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 8px;
+}
+
+.community-ctas {
+  display: flex;
+  gap: 12px;
 }
 
 .community-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 52px;
+  width: 100px;
+  height: 44px;
   padding: 0;
   background: #1877F2;
   color: #fff;
@@ -1091,30 +1118,23 @@ body.menu-open {
 }
 
 .community-cta:hover {
-  background: #166FE5;
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(24, 119, 242, 0.4);
+  box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
 }
 
 .community-cta svg {
-  width: 24px;
-  height: 24px;
-}
-
-.community-ctas {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
+  width: 22px;
+  height: 22px;
 }
 
 .community-cta--tt {
-  background: #000;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .community-cta--tt:hover {
-  background: #111;
-  box-shadow: 0 8px 30px rgba(255, 0, 80, 0.3);
+  background: #1a1a1a;
+  box-shadow: 0 8px 25px rgba(255, 0, 80, 0.25);
 }
 
 /* ===== CONTACT ===== */
@@ -1486,28 +1506,46 @@ body.menu-open {
   }
 
   .community {
-    padding: 80px 0;
+    margin: 0 12px;
+    aspect-ratio: auto;
+    padding: 48px 20px;
+    border-radius: 18px;
   }
 
-  .community-stats {
-    flex-direction: column;
-    gap: 32px;
+  .community-bg-img,
+  .community::after {
+    border-radius: 18px;
+  }
+
+  .community-content {
+    padding: 0;
+  }
+
+  .community-title {
+    font-size: 32px;
+    letter-spacing: 2px;
   }
 
   .community-subtitle {
-    margin-bottom: 40px;
+    font-size: 14px;
+    margin-bottom: 32px;
+    color: #fff;
+  }
+
+  .community-stats {
+    flex-direction: row;
+    gap: 32px;
   }
 
   .stat-number {
-    font-size: 48px;
+    font-size: 28px;
   }
 
   .stat-suffix {
-    font-size: 32px;
+    font-size: 20px;
   }
 
-  .community-ctas {
-    justify-content: center;
-    gap: 16px;
+  .stat-label {
+    font-size: 9px;
   }
 }

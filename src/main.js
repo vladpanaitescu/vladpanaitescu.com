@@ -519,7 +519,14 @@ function initCommunityCounters() {
   const counters = document.querySelectorAll('.stat-number');
   if (!counters.length) return;
 
+  const billionLabels = { ro: 'Miliarde', en: 'Billion', de: 'Milliarden', it: 'Miliardi', fr: 'Milliards' };
+  const millionLabels = { ro: 'Milioane', en: 'Million', de: 'Millionen', it: 'Milioni', fr: 'Millions' };
+
   function formatNumber(n) {
+    const lang = getCurrentLang();
+    if (n >= 1e9) return Math.floor(n / 1e9) + ' ' + (billionLabels[lang] || 'Billion');
+    if (n >= 1e6) return Math.floor(n / 1e6) + ' ' + (millionLabels[lang] || 'Million');
+    if (n >= 1e3) return Math.floor(n / 1e3) + ' K';
     return n.toLocaleString('ro-RO');
   }
 
