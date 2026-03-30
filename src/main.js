@@ -78,12 +78,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
   }
 
-  // Reveal on window load or after 5s timeout
+  // Wait for ALL images to load before revealing
+  function waitForAllImages() {
+    const images = Array.from(document.querySelectorAll('img'));
+    const bgImages = Array.from(document.querySelectorAll('.community-bg-img, .avatar-img'));
+    
+    const imgPromises = images.map(img => {
+      if (img.complete && img.naturalHeight > 0) return Promise.resolve();
+      return new Promise(resolve => {
+        img.addEventListener('load', resolve, { once: true });
+        img.addEventListener('error', resolve, { once: true });
+      });
+    });
+
+    // Also wait for CSS background images on key elements
+    const bgPromises = bgImages.map(el => {
+      const bg = getComputedStyle(el).backgroundImage;
+      if (!bg || bg === 'none') return Promise.resolve();
+      const url = bg.match(/url\(["']?(.+?)["']?\)/)?.[1];
+      if (!url) return Promise.resolve();
+      return new Promise(resolve => {
+        const testImg = new Image();
+        testImg.onload = resolve;
+        testImg.onerror = resolve;
+        testImg.src = url;
+      });
+    });
+
+    return Promise.all([...imgPromises, ...bgPromises]);
+  }
+
   if (document.readyState === 'complete') {
-    revealSite();
+    waitForAllImages().then(revealSite);
   } else {
-    window.addEventListener('load', revealSite);
-    setTimeout(revealSite, 5000);
+    window.addEventListener('load', () => waitForAllImages().then(revealSite));
+    // Safety fallback: 15s max wait
+    setTimeout(revealSite, 15000);
   }
 });
 
