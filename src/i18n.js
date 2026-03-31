@@ -5,7 +5,7 @@ const translationData = {
   ro: {
     'nav.about': 'DESPRE MINE',
     'nav.brands': 'CLIENȚI',
-    'nav.projects': 'PROIECTE',
+    'nav.projects': 'SERVICII',
     'nav.contact': 'CONTACT',
     'hero.greeting': 'BINE AI VENIT',
     'hero.description': 'Un Graphic Designer pasionat de crearea unor identități vizuale memorabile și experiențe digitale care inspiră 🎨',
@@ -38,7 +38,7 @@ const translationData = {
   en: {
     'nav.about': 'ABOUT ME',
     'nav.brands': 'CLIENTS',
-    'nav.projects': 'PROJECTS',
+    'nav.projects': 'SERVICES',
     'nav.contact': 'CONTACT',
     'hero.greeting': 'WELCOME',
     'hero.description': 'A Graphic Designer passionate about crafting memorable visual identities and inspiring digital experiences 🎨',
@@ -64,14 +64,14 @@ const translationData = {
     'contact.error': 'Error sending. Please try again.',
     'footer.rights': 'All rights reserved.',
     'community.title': 'COMMUNITY',
-    'community.subtitle': 'Check out one of the world\'s largest multi-channel communities for car enthusiasts, created by yours truly.',
+    'community.subtitle': 'Check out one of the world\'s largest multi-channel community for car enthusiasts, created by yours truly.',
     'community.members': 'Followers',
     'community.views': 'Views'
   },
   de: {
     'nav.about': 'ÜBER MICH',
     'nav.brands': 'KUNDEN',
-    'nav.projects': 'PROJEKTE',
+    'nav.projects': 'DIENSTLEISTUNGEN',
     'nav.contact': 'KONTAKT',
     'hero.greeting': 'WILLKOMMEN',
     'hero.description': 'Ein Grafikdesigner mit Leidenschaft für einprägsame visuelle Identitäten und inspirierende digitale Erlebnisse 🎨',
@@ -104,7 +104,7 @@ const translationData = {
   it: {
     'nav.about': 'CHI SONO',
     'nav.brands': 'CLIENTI',
-    'nav.projects': 'PROGETTI',
+    'nav.projects': 'SERVIZI',
     'nav.contact': 'CONTATTO',
     'hero.greeting': 'BENVENUTO',
     'hero.description': 'Un Graphic Designer appassionato nel creare identità visive memorabili ed esperienze digitali che ispirano 🎨',
@@ -137,7 +137,7 @@ const translationData = {
   fr: {
     'nav.about': 'À PROPOS DE MOI',
     'nav.brands': 'CLIENTS',
-    'nav.projects': 'PROJETS',
+    'nav.projects': 'SERVICES',
     'nav.contact': 'CONTACT',
     'hero.greeting': 'BIENVENUE',
     'hero.description': 'Un Graphic Designer passionné par la création d\'identités visuelles mémorables et d\'expériences numériques inspirantes 🎨',
