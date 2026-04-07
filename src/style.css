@@ -1124,6 +1124,25 @@ body.menu-open {
   box-shadow: 0 8px 25px rgba(255, 0, 80, 0.25);
 }
 
+.community-cta--appstore {
+  background: #fff;
+  color: #111;
+}
+
+.community-cta--appstore:hover {
+  background: #e8e8e8;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+.community-cta--gplay {
+  background: #01875f;
+}
+
+.community-cta--gplay:hover {
+  background: #02a070;
+  box-shadow: 0 8px 25px rgba(1, 135, 95, 0.4);
+}
+
 /* ===== CONTACT ===== */
 .contact {
   padding: 120px 0;
@@ -1586,7 +1605,20 @@ body.menu-open {
   }
 
   .community-ctas {
-    align-self: flex-start;
+    align-self: stretch;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .community-cta {
+    flex: 1;
+    width: auto;
+    height: 38px;
+  }
+
+  .community-cta svg {
+    width: 18px;
+    height: 18px;
   }
 
   .stat-number {
