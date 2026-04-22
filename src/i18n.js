@@ -33,7 +33,9 @@ const translationData = {
     'community.title': 'COMUNITATE',
     'community.subtitle': 'Descoperă una dintre cele mai mari comunități multi-canal de pasionați auto din lume, creată chiar de mine.',
     'community.members': 'Followeri',
-    'community.views': 'Vizualizări'
+    'community.views': 'Vizualizări',
+    'behance.label': 'VEZI PORTOFOLIUL COMPLET',
+    'behance.tagline': 'Vrei să vezi mai mult?'
   },
   en: {
     'nav.about': 'ABOUT ME',
@@ -66,7 +68,9 @@ const translationData = {
     'community.title': 'COMMUNITY',
     'community.subtitle': 'Check out one of the world\'s largest multi-channel community for car enthusiasts, created by yours truly.',
     'community.members': 'Followers',
-    'community.views': 'Views'
+    'community.views': 'Views',
+    'behance.label': 'VIEW FULL PORTFOLIO',
+    'behance.tagline': 'Want to see more?'
   },
   de: {
     'nav.about': 'ÜBER MICH',
@@ -99,7 +103,9 @@ const translationData = {
     'community.title': 'GEMEINSCHAFT',
     'community.subtitle': 'Entdecke eine der weltweit größten Multi-Channel-Communitys für Autobegeisterte, gegründet von mir persönlich.',
     'community.members': 'Follower',
-    'community.views': 'Aufrufe'
+    'community.views': 'Aufrufe',
+    'behance.label': 'PORTFOLIO ANSEHEN',
+    'behance.tagline': 'Möchtest du mehr sehen?'
   },
   it: {
     'nav.about': 'CHI SONO',
@@ -132,7 +138,9 @@ const translationData = {
     'community.title': 'COMUNITÀ',
     'community.subtitle': 'Scopri una delle più grandi comunità multi-canale al mondo per appassionati di auto, creata dal sottoscritto.',
     'community.members': 'Follower',
-    'community.views': 'Visualizzazioni'
+    'community.views': 'Visualizzazioni',
+    'behance.label': 'VEDI IL PORTFOLIO COMPLETO',
+    'behance.tagline': 'Vuoi vedere di più?'
   },
   fr: {
     'nav.about': 'À PROPOS DE MOI',
@@ -165,7 +173,9 @@ const translationData = {
     'community.title': 'COMMUNAUTÉ',
     'community.subtitle': 'Découvrez l\'une des plus grandes communautés multi-canal au monde pour les passionnés d\'automobile, créée par votre serviteur.',
     'community.members': 'Abonnés',
-    'community.views': 'Vues'
+    'community.views': 'Vues',
+    'behance.label': 'VOIR LE PORTFOLIO COMPLET',
+    'behance.tagline': 'Envie d\'en voir plus ?'
   }
 };
 

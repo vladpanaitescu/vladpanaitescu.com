@@ -503,7 +503,7 @@ body.menu-open {
 
 /* ===== GALLERY SCROLL ROWS ===== */
 .gallery-scroll {
-  padding: 60px 0 100px;
+  padding: 20px 0 40px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -695,6 +695,71 @@ body.menu-open {
   opacity: 1 !important;
 }
 
+/* ===== BEHANCE CTA ===== */
+.behance-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 0 0 60px;
+}
+
+.behance-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 100px;
+  border: 2px solid #1769ff;
+  text-decoration: none;
+  color: var(--text-white);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.behance-link::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: #1769ff;
+  border-radius: 100px;
+  transform: translateX(-100%) skewX(-15deg);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: -1;
+}
+
+.behance-link:hover::before {
+  transform: translateX(0) skewX(0deg);
+}
+
+.behance-link:hover {
+  color: var(--text-white);
+  border-color: #1769ff;
+}
+
+.behance-logo {
+  width: 20px;
+  height: 20px;
+  color: #1769ff;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.behance-link:hover .behance-logo {
+  color: var(--text-white);
+}
+
+.behance-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+
 /* ===== ABOUT ===== */
 .about {
   padding: 220px 0;
@@ -803,7 +868,7 @@ body.menu-open {
 
 .about-text-block p {
   font-size: clamp(16px, 2vw, 20px);
-  color: var(--text-gray);
+  color: var(--text-white);
   line-height: 2;
   text-wrap: balance;
 }
