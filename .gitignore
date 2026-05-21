@@ -38,3 +38,7 @@ brain/
 
 # Local Netlify folder
 .netlify
+
+# Utility Scratch / Extraction Scripts
+scratch*
+extract_behance.cjs
