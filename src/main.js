@@ -568,7 +568,7 @@ function initProjectOverlay() {
           <div class="project-detail-block project-detail-video media-container">
             <div class="video-wrapper">
               <div class="media-skeleton"><div class="media-spinner"></div></div>
-              <iframe class="lazy-media-item" data-src="${block.src}" frameborder="0" allowfullscreen sandbox="allow-scripts allow-pointer-lock allow-forms"></iframe>
+              <iframe class="lazy-media-item" data-src="${block.src}" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
         `;
