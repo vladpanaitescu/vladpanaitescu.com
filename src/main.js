@@ -540,11 +540,6 @@ function initProjectOverlay() {
   function openProject(project) {
     let html = '';
 
-    // Hero image (official cover photo)
-    if (project.cover) {
-      html += `<div class="project-detail-hero"><img src="${project.cover}" alt="${project.title}" /></div>`;
-    }
-
     // Header
     html += `
       <div class="project-detail-header">

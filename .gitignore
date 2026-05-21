@@ -42,3 +42,6 @@ brain/
 # Utility Scratch / Extraction Scripts
 scratch*
 extract_behance.cjs
+
+# Local high-res original backups
+*_bak
