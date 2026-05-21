@@ -4,6 +4,93 @@ import { initI18n, getCurrentLang, translationData } from './i18n.js';
 // ===== BEHANCE PROJECTS DATA — matched exactly to Behance profile =====
 const projects = [
   {
+    "id": "solar-performance",
+    "title": "Solar Performance Creative Campaign",
+    "cover": "/Images/covers/solar-performance.jpg",
+    "tags": [
+      "Campaign Design",
+      "Performance Marketing",
+      "Digital Ads"
+    ],
+    "behanceUrl": "https://www.behance.net/gallery/249789703/Solar-Performance-Creative-Campaign",
+    "content": [
+      {
+        "type": "text",
+        "html": "<div>Strategic paid media creative direction and visual design focused on performance-driven advertising.</div><div>This project was built around creating high-converting&nbsp;visuals for Meta with a strong emphasis on brand consistency, scroll-stopping compositions, clear messaging hierarchy, and conversion-oriented design systems across multiple digital placements and formats.</div>",
+        "align": "center"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_1.jpg"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_2.jpg"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_3.jpg"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_4.jpg"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_5.jpg"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_6.jpg"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_7.jpg"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_8.jpg"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_9.jpg"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/solar-performance/image_10.jpg"
+      }
+    ]
+  },
+  {
+    "id": "video-ai-workflows",
+    "title": "Creative Video Production & AI Workflows",
+    "cover": "/Images/covers/video-ai-workflows.jpg",
+    "tags": [
+      "Video Production",
+      "AI Workflows",
+      "Creative Direction"
+    ],
+    "behanceUrl": "https://www.behance.net/gallery/249790317/Creative-Video-Production-AI-Workflows",
+    "content": [
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/I944b4qR75p/embed?api_key=behance1&bgcolor=%23191919"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/CzFULJhAiry/embed?api_key=behance1&bgcolor=%23191919"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/6skZFR-V-JW/embed?api_key=behance1&bgcolor=%23191919"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/-3ZRr38d2NV/embed?api_key=behance1&bgcolor=%23191919"
+      }
+    ]
+  },
+  {
     "id": "oradea-parking",
     "title": "Oradea Parking App – Official Tutorial Series",
     "cover": "/Images/covers/oradea-parking.jpg",
@@ -461,6 +548,46 @@ const projects = [
       {
         "type": "image",
         "src": "/Images/projects/huawei/image_5.png"
+      }
+    ]
+  },
+  {
+    "id": "game-design-numbers",
+    "title": "Mobile Game Design - Numbers",
+    "cover": "/Images/covers/game-design-numbers.png",
+    "tags": [
+      "Mobile Game Design",
+      "UI/UX",
+      "Visual Development"
+    ],
+    "behanceUrl": "https://www.behance.net/gallery/175697587/Mobile-Game-Design-Numbers",
+    "content": [
+      {
+        "type": "text",
+        "html": "<div>For this freelance project, I was asked to do a whole redesign for this game called Numbers. Me and the client&nbsp;embarked on an exciting project, crafting a unique game that fuses calculus methods to calculate seven numbers into one target. Inspired by the elegance of hexagons and the brilliance of the brain, we designed captivating icons that would immerse players in a visually stunning and intellectually stimulating environment. The fusion of aesthetics and functionality drove every design decision.<br></div>",
+        "align": "center"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/game-design-numbers/image_1.png"
+      },
+      {
+        "type": "text",
+        "html": "<div>Objective: Develop an engaging mobile game that combines mathematical challenges with interactive gameplay.</div><div>Role: Visual design, user interface development, user experience enhancement.</div><div>Tools: Adobe XD, Adobe Illustrator, Adobe Photoshop.</div>",
+        "align": "center"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/game-design-numbers/image_2.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/game-design-numbers/image_3.png"
+      },
+      {
+        "type": "text",
+        "html": "<div>The mobile game successfully merges educational content with entertaining gameplay, catering to both casual gamers and those seeking mental stimulation. By providing an engaging and intellectually stimulating experience, the game has the potential to captivate a diverse audience.<br></div>",
+        "align": "center"
       }
     ]
   }
