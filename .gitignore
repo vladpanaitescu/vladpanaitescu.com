@@ -45,3 +45,7 @@ extract_behance.cjs
 
 # Local high-res original backups
 *_bak
+
+# Deployment Credentials & Scripts
+.env
+deploy_hostico.cjs
