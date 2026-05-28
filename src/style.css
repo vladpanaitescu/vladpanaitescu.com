@@ -397,6 +397,11 @@ body.menu-open { overflow: hidden; }
   gap: 4px;
 }
 
+/* Carspotting page: 2 per row */
+.projects-grid--2col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .project-grid-card {
   position: relative;
   overflow: hidden;
@@ -449,6 +454,21 @@ body.menu-open { overflow: hidden; }
   font-size: 12px;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 400;
+}
+
+/* ===== PAIR WRAPPER (two mini-cards in one grid cell) ===== */
+.pair-wrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.pair-wrapper .pair-card {
+  flex: 1;
+  min-width: 0;
+}
+
+.pair-wrapper .project-grid-card-cover {
+  aspect-ratio: 101 / 158;
 }
 
 /* ===== PROJECT DETAIL OVERLAY ===== */
@@ -900,6 +920,11 @@ body.menu-open { overflow: hidden; }
     transform: translateY(0);
   }
 
+  /* Show text on only the first CarGuessr card on mobile */
+  .pair-wrapper .pair-card:last-child .project-grid-card-info > * {
+    visibility: hidden;
+  }
+
   .project-overlay-container {
     max-width: 100%;
     border-radius: 0;
@@ -998,4 +1023,179 @@ body.menu-open { overflow: hidden; }
 
 @keyframes media-shimmer {
   100% { transform: translateX(100%); }
+}
+
+/* ===== CAR SPOTTING CUSTOM STYLES ===== */
+.hero-carspotting {
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.98)), url('/Images/new-carspotting-bg.webp') no-repeat center center / cover;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-carspotting-inner {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.hero-carspotting-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 8vw, 110px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: var(--text-white);
+  opacity: 0;
+  animation: fadeInUp 1s var(--ease-out) 0.1s forwards;
+  margin-bottom: 12px;
+}
+
+.hero-carspotting-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(14px, 2.5vw, 22px);
+  color: var(--accent-orange);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  opacity: 0;
+  animation: fadeInUp 1.2s var(--ease-out) 0.3s forwards;
+  text-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+}
+
+.hero-carspotting-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: fadeInUp 1.5s var(--ease-out) 0.5s forwards;
+}
+
+.scroll-arrow {
+  width: 24px;
+  height: 24px;
+  border-bottom: 2px solid var(--text-gray);
+  border-right: 2px solid var(--text-gray);
+  transform: rotate(45deg);
+  animation: scrollPulse 2s infinite;
+}
+
+@keyframes scrollPulse {
+  0% { transform: rotate(45deg) translate(0, 0); opacity: 0.5; }
+  50% { transform: rotate(45deg) translate(8px, 8px); opacity: 1; }
+  100% { transform: rotate(45deg) translate(0, 0); opacity: 0.5; }
+}
+
+/* Stats Dashboard */
+.stats-dashboard {
+  padding: 120px 0;
+  background: #0a0a0a;
+  text-align: center;
+  position: relative;
+}
+
+.stats-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 80px 40px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+}
+
+.stats-subtitle {
+  max-width: 600px;
+  margin: 0 auto 50px;
+}
+
+.stats-total-num {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 12vw, 150px);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 0.9;
+  margin-bottom: 12px;
+  letter-spacing: -3px;
+  font-weight: 400;
+  display: block;
+}
+
+.stats-total-label {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: var(--text-gray);
+  text-transform: uppercase;
+  margin-bottom: 60px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 60px;
+}
+
+.stats-card {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  padding: 30px 24px;
+  transition: transform 0.4s var(--ease-out), background 0.4s, border-color 0.4s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.stats-card-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+
+.stats-card-num {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 44px);
+  color: #fff;
+  line-height: 1.2;
+}
+
+.stats-card-label {
+  font-size: 13px;
+  color: var(--text-gray);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+}
+
+@media (max-width: 768px) {
+  .hero-carspotting {
+    height: 70vh;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-top: 40px;
+  }
+  .stats-container {
+    padding: 50px 20px;
+  }
+  .stats-total-num {
+    font-size: 20vw;
+  }
 }

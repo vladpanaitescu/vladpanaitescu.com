@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Spotting | Vlad Panaitescu Community</title>
+  <meta name="description" content="Welcome to Car Spotting — the biggest car enthusiast community, founded by Vlad Panaitescu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Anton&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+
+  <!-- ===== LOADER ===== -->
+  <div class="loader-overlay" id="loaderOverlay">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../" data-i18n="nav.home">ACASĂ</a></li>
+        <li><a href="#" class="active" data-i18n="nav.carspotting">CAR SPOTTING</a></li>
+        <li><a href="../#contact" data-i18n="nav.contact">CONTACT</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn" id="langBtn" aria-label="Schimbă limba">
+            <span id="currentLangFlag">🇷🇴</span>
+            <span id="currentLangCode">RO</span>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-option" data-lang="ro"><span>🇷🇴</span> Română</button>
+            <button class="lang-option" data-lang="en"><span>🇬🇧</span> English</button>
+            <button class="lang-option" data-lang="de"><span>🇩🇪</span> Deutsch</button>
+            <button class="lang-option" data-lang="it"><span>🇮🇹</span> Italiano</button>
+            <button class="lang-option" data-lang="fr"><span>🇫🇷</span> Français</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== CARDS GRID ===== -->
+  <section class="projects-section" id="communityGridSection" style="padding-top: 80px;">
+    <div class="projects-grid projects-grid--2col" id="carspottingGrid">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <script type="module" src="/src/carspotting.js"></script>
+</body>
+
+</html>

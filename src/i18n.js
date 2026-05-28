@@ -4,7 +4,9 @@ const CODES = { ro: 'RO', en: 'EN', de: 'DE', it: 'IT', fr: 'FR' };
 const translationData = {
   ro: {
     'nav.projects': 'PROIECTE',
+    'nav.carspotting': 'CAR SPOTTING',
     'nav.contact': 'CONTACT',
+    'nav.home': 'ACASĂ',
     'hero.greeting': 'BINE AI VENIT',
     'hero.description': 'Un Graphic Designer pasionat de crearea unor identități vizuale memorabile și experiențe digitale care inspiră 🎨',
     'hero.cta': 'CONTACTEAZĂ-MĂ',
@@ -33,11 +35,18 @@ const translationData = {
     'community.members': 'Followeri',
     'community.views': 'Vizualizări',
     'behance.label': 'VEZI PORTOFOLIUL COMPLET',
-    'behance.tagline': 'Vrei să vezi mai mult?'
+    'behance.tagline': 'Vrei să vezi mai mult?',
+    'carspotting.greeting': 'WELCOME TO CAR SPOTTING',
+    'carspotting.description': 'the biggest car enthusiast community',
+    'carspotting.stats_title': 'IMPACTUL COMUNITĂȚII',
+    'carspotting.stats_subtitle': 'Peste jumătate de milion de pasionați auto uniți pe toate platformele noastre.',
+    'carspotting.total_followers': 'Total Urmăritori'
   },
   en: {
     'nav.projects': 'PROJECTS',
+    'nav.carspotting': 'CAR SPOTTING',
     'nav.contact': 'CONTACT',
+    'nav.home': 'HOME',
     'hero.greeting': 'WELCOME',
     'hero.description': 'A Graphic Designer passionate about crafting memorable visual identities and inspiring digital experiences 🎨',
     'hero.cta': 'CONTACT ME',
@@ -66,11 +75,18 @@ const translationData = {
     'community.members': 'Followers',
     'community.views': 'Views',
     'behance.label': 'VIEW FULL PORTFOLIO',
-    'behance.tagline': 'Want to see more?'
+    'behance.tagline': 'Want to see more?',
+    'carspotting.greeting': 'WELCOME TO CAR SPOTTING',
+    'carspotting.description': 'the biggest car enthusiast community',
+    'carspotting.stats_title': 'COMMUNITY IMPACT',
+    'carspotting.stats_subtitle': 'Over half a million car enthusiasts united across all our platforms.',
+    'carspotting.total_followers': 'Total Followers'
   },
   de: {
     'nav.projects': 'PROJEKTE',
+    'nav.carspotting': 'CAR SPOTTING',
     'nav.contact': 'KONTAKT',
+    'nav.home': 'STARTSEITE',
     'hero.greeting': 'WILLKOMMEN',
     'hero.description': 'Ein Grafikdesigner mit Leidenschaft für einprägsame visuelle Identitäten und inspirierende digitale Erlebnisse 🎨',
     'hero.cta': 'KONTAKTIERE MICH',
@@ -99,11 +115,18 @@ const translationData = {
     'community.members': 'Follower',
     'community.views': 'Aufrufe',
     'behance.label': 'PORTFOLIO ANSEHEN',
-    'behance.tagline': 'Möchtest du mehr sehen?'
+    'behance.tagline': 'Möchtest du mehr sehen?',
+    'carspotting.greeting': 'WELCOME TO CAR SPOTTING',
+    'carspotting.description': 'the biggest car enthusiast community',
+    'carspotting.stats_title': 'GEMEINSCHAFTS-IMPACT',
+    'carspotting.stats_subtitle': 'Über eine halbe Million Autobegeisterte auf allen unseren Plattformen vereint.',
+    'carspotting.total_followers': 'Follower Gesamt'
   },
   it: {
     'nav.projects': 'PROGETTI',
+    'nav.carspotting': 'CAR SPOTTING',
     'nav.contact': 'CONTATTO',
+    'nav.home': 'HOME',
     'hero.greeting': 'BENVENUTO',
     'hero.description': 'Un Graphic Designer appassionato nel creare identità visive memorabili ed esperienze digitali che ispirano 🎨',
     'hero.cta': 'CONTATTAMI',
@@ -113,7 +136,7 @@ const translationData = {
     'about.line2': 'Ho creato alcuni dei contenuti digitali più virali online e ho collaborato con brand internazionali per raccontare le loro storie in modi distintivi e memorabili.',
     'about.line3': '',
     'about.line4': '',
-    'about.line5': 'Iniziamo un nuovo ciclo insieme.',
+    'about.line5': 'Iniziamo un nouvo ciclo insieme.',
     'about.cta': 'CONTATTAMI',
     'services.title': 'SERVIZI',
     'reviews.title': 'RECENSIONI',
@@ -132,11 +155,18 @@ const translationData = {
     'community.members': 'Follower',
     'community.views': 'Visualizzazioni',
     'behance.label': 'VEDI IL PORTFOLIO COMPLETO',
-    'behance.tagline': 'Vuoi vedere di più?'
+    'behance.tagline': 'Vuoi vedere di più?',
+    'carspotting.greeting': 'WELCOME TO CAR SPOTTING',
+    'carspotting.description': 'the biggest car enthusiast community',
+    'carspotting.stats_title': 'IMPATTO DELLA COMUNITÀ',
+    'carspotting.stats_subtitle': 'Oltre mezzo milione di appassionati di auto uniti su tutte le nostre piattaforme.',
+    'carspotting.total_followers': 'Follower Totali'
   },
   fr: {
     'nav.projects': 'PROJETS',
+    'nav.carspotting': 'CAR SPOTTING',
     'nav.contact': 'CONTACT',
+    'nav.home': 'ACCUEIL',
     'hero.greeting': 'BIENVENUE',
     'hero.description': 'Un Graphic Designer passionné par la création d\'identités visuelles mémorables et d\'expériences numériques inspirantes 🎨',
     'hero.cta': 'CONTACTEZ-MOI',
@@ -165,7 +195,12 @@ const translationData = {
     'community.members': 'Abonnés',
     'community.views': 'Vues',
     'behance.label': 'VOIR LE PORTFOLIO COMPLET',
-    'behance.tagline': 'Envie d\'en voir plus ?'
+    'behance.tagline': 'Envie d\'en voir plus ?',
+    'carspotting.greeting': 'WELCOME TO CAR SPOTTING',
+    'carspotting.description': 'the biggest car enthusiast community',
+    'carspotting.stats_title': 'IMPACT DE LA COMMUNAUTÉ',
+    'carspotting.stats_subtitle': 'Plus d\'un demi-million de passionnés d\'automobile unis sur toutes nos plateformes.',
+    'carspotting.total_followers': 'Total Abonnés'
   }
 };
 
