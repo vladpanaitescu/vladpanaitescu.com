@@ -4,6 +4,92 @@ import { initI18n, getCurrentLang, translationData } from './i18n.js';
 // ===== BEHANCE PROJECTS DATA — matched exactly to Behance profile =====
 const projects = [
   {
+    "id": "video-ai-workflows",
+    "title": "Creative Video Production & AI Workflows",
+    "cover": "/Images/covers/video-ai-workflows.jpg",
+    "tags": [
+      "Video Production",
+      "AI Workflows",
+      "Creative Direction"
+    ],
+    "behanceUrl": "https://www.behance.net/gallery/249790317/Creative-Video-Production-AI-Workflows",
+    "content": [
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/I944b4qR75p/embed?api_key=behance1&bgcolor=%23191919"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/CzFULJhAiry/embed?api_key=behance1&bgcolor=%23191919"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/6skZFR-V-JW/embed?api_key=behance1&bgcolor=%23191919"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/-3ZRr38d2NV/embed?api_key=behance1&bgcolor=%23191919"
+      }
+    ]
+  },
+  {
+    "id": "profructta",
+    "title": "Profructta — Beverage Commercial Production Pipeline",
+    "cover": "/Images/covers/profructta.jpg",
+    "tags": [
+      "3D",
+      "Video Production",
+      "Commercial"
+    ],
+    "behanceUrl": "https://www.behance.net/gallery/248964487/Profructta-Beverage-Commercial-Production-Pipeline",
+    "content": [
+      {
+        "type": "image",
+        "src": "/Images/projects/profructta/image_1.jpg"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/8685njzonh3/embed?api_key=behance1&bgcolor=%23191919"
+      }
+    ]
+  },
+  {
+    "id": "oradea-parking",
+    "title": "Oradea Parking App – Official Tutorial Series",
+    "cover": "/Images/covers/oradea-parking.jpg",
+    "tags": [
+      "Video Production",
+      "Motion Graphics",
+      "Concept Development"
+    ],
+    "behanceUrl": "https://www-behance.net/gallery/245062349/Oradea-Parking-App-Official-Tutorial-Series",
+    "content": [
+      {
+        "type": "text",
+        "html": "<div>Residential Parking App – Oradea</div><div>Tutorial Video Series</div>",
+        "align": "center"
+      },
+      {
+        "type": "text",
+        "html": "<div>A complete end-to-end production of three tutorial videos designed to support user onboarding for the Oradea Residential Parking Application.</div><div>The project required translating a functional municipal platform into a clear, structured and accessible visual experience.</div><div>I led the entire creative process, including:</div><div>• Concept development and information architecture<br>• Scriptwriting and narrative structure<br>• Voice-over production and direction<br>• Custom background music composition<br>• Motion graphics design and animation<br>• Video editing and final sound mixing</div>",
+        "align": "center"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/oradea-parking/image_1.jpg"
+      },
+      {
+        "type": "text",
+        "html": "<div>The focus was clarity, usability and professional execution — ensuring the content remains intuitive, engaging and accessible across all user segments.</div><div>The final outcome is a cohesive tutorial series that enhances digital adoption through thoughtful storytelling and refined motion design.</div>",
+        "align": "center"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/5Y_TkG3vnS-/embed?api_key=behance1&bgcolor=%23191919"
+      }
+    ]
+  },
+  {
     "id": "solar-performance",
     "title": "Solar Performance Creative Campaign",
     "cover": "/Images/covers/solar-performance.jpg",
@@ -58,71 +144,6 @@ const projects = [
       {
         "type": "image",
         "src": "/Images/projects/solar-performance/image_10.jpg"
-      }
-    ]
-  },
-  {
-    "id": "video-ai-workflows",
-    "title": "Creative Video Production & AI Workflows",
-    "cover": "/Images/covers/video-ai-workflows.jpg",
-    "tags": [
-      "Video Production",
-      "AI Workflows",
-      "Creative Direction"
-    ],
-    "behanceUrl": "https://www.behance.net/gallery/249790317/Creative-Video-Production-AI-Workflows",
-    "content": [
-      {
-        "type": "video",
-        "src": "https://www-ccv.adobe.io/v1/player/ccv/I944b4qR75p/embed?api_key=behance1&bgcolor=%23191919"
-      },
-      {
-        "type": "video",
-        "src": "https://www-ccv.adobe.io/v1/player/ccv/CzFULJhAiry/embed?api_key=behance1&bgcolor=%23191919"
-      },
-      {
-        "type": "video",
-        "src": "https://www-ccv.adobe.io/v1/player/ccv/6skZFR-V-JW/embed?api_key=behance1&bgcolor=%23191919"
-      },
-      {
-        "type": "video",
-        "src": "https://www-ccv.adobe.io/v1/player/ccv/-3ZRr38d2NV/embed?api_key=behance1&bgcolor=%23191919"
-      }
-    ]
-  },
-  {
-    "id": "oradea-parking",
-    "title": "Oradea Parking App – Official Tutorial Series",
-    "cover": "/Images/covers/oradea-parking.jpg",
-    "tags": [
-      "Video Production",
-      "Motion Graphics",
-      "Concept Development"
-    ],
-    "behanceUrl": "https://www.behance.net/gallery/245062349/Oradea-Parking-App-Official-Tutorial-Series",
-    "content": [
-      {
-        "type": "text",
-        "html": "<div>Residential Parking App – Oradea</div><div>Tutorial Video Series</div>",
-        "align": "center"
-      },
-      {
-        "type": "text",
-        "html": "<div>A complete end-to-end production of three tutorial videos designed to support user onboarding for the Oradea Residential Parking Application.</div><div>The project required translating a functional municipal platform into a clear, structured and accessible visual experience.</div><div>I led the entire creative process, including:</div><div>• Concept development and information architecture<br>• Scriptwriting and narrative structure<br>• Voice-over production and direction<br>• Custom background music composition<br>• Motion graphics design and animation<br>• Video editing and final sound mixing</div>",
-        "align": "center"
-      },
-      {
-        "type": "image",
-        "src": "/Images/projects/oradea-parking/image_1.jpg"
-      },
-      {
-        "type": "text",
-        "html": "<div>The focus was clarity, usability and professional execution — ensuring the content remains intuitive, engaging and accessible across all user segments.</div><div>The final outcome is a cohesive tutorial series that enhances digital adoption through thoughtful storytelling and refined motion design.</div>",
-        "align": "center"
-      },
-      {
-        "type": "video",
-        "src": "https://www-ccv.adobe.io/v1/player/ccv/5Y_TkG3vnS-/embed?api_key=behance1&bgcolor=%23191919"
       }
     ]
   },
@@ -276,27 +297,6 @@ const projects = [
         "type": "text",
         "html": "<div>The final voucher design successfully encapsulated the \"There's No Wrong Way to Get a Tattoo\" campaign's essence while staying true to Ballantine's brand identity.<br></div>",
         "align": "center"
-      }
-    ]
-  },
-  {
-    "id": "profructta",
-    "title": "Profructta — Beverage Commercial Production Pipeline",
-    "cover": "/Images/covers/profructta.jpg",
-    "tags": [
-      "3D",
-      "Video Production",
-      "Commercial"
-    ],
-    "behanceUrl": "https://www.behance.net/gallery/248964487/Profructta-Beverage-Commercial-Production-Pipeline",
-    "content": [
-      {
-        "type": "image",
-        "src": "/Images/projects/profructta/image_1.jpg"
-      },
-      {
-        "type": "video",
-        "src": "https://www-ccv.adobe.io/v1/player/ccv/8685njzonh3/embed?api_key=behance1&bgcolor=%23191919"
       }
     ]
   },
@@ -529,7 +529,7 @@ const projects = [
       },
       {
         "type": "text",
-        "html": "<div>3. Product Cards: Highlighting the latest offers, the product cards section provides a compelling visual and textual overview of Huawei's offerings, aligning with the campaign's objectives.</div>",
+        "html": "<div>3. Product Cards: Highlighting the latest offers, the product cards section provides a appealing visual and textual overview of Huawei's offerings, aligning with the campaign's objectives.</div>",
         "align": "center"
       },
       {
