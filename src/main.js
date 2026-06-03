@@ -17,7 +17,20 @@ const projects = [
       {
         "type": "video",
         "src": "https://www-ccv.adobe.io/v1/player/ccv/I944b4qR75p/embed?api_key=behance1&bgcolor=%23191919"
-      },
+      }
+    ]
+  },
+  {
+    "id": "bgs-video-production",
+    "title": "BGS — Video Campaign Production",
+    "cover": "/Images/covers/bgs-video-production.png",
+    "tags": [
+      "Video Production",
+      "Creative Direction",
+      "Campaign Design"
+    ],
+    "behanceUrl": "https://www.behance.net/gallery/245553355/BGS-Grup-National-Campaign-Visual-Development",
+    "content": [
       {
         "type": "video",
         "src": "https://www-ccv.adobe.io/v1/player/ccv/CzFULJhAiry/embed?api_key=behance1&bgcolor=%23191919"
