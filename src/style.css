@@ -721,66 +721,57 @@ body.menu-open { overflow: hidden; }
 
 .contact-inner { text-align: center; }
 
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 500px;
-  margin: 0 auto 32px;
-  width: 100%;
-}
-
-.contact-input,
-.contact-textarea {
-  width: 100%;
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  color: var(--text-white);
-  font-family: var(--font-body);
-  font-size: 15px;
-  outline: none;
-  transition: border-color 0.3s, background 0.3s;
-  box-sizing: border-box;
-}
-
-.contact-input::placeholder,
-.contact-textarea::placeholder { color: rgba(255, 255, 255, 0.3); }
-
-.contact-input:focus,
-.contact-textarea:focus {
-  border-color: rgba(139, 92, 246, 0.5);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.contact-textarea {
-  resize: vertical;
-  min-height: 120px;
-  max-height: 400px;
-}
-
-.contact-form .btn-contact { align-self: center; }
-
-.contact-email {
-  display: inline-block;
-  font-size: 14px;
-  letter-spacing: 1px;
+.contact-description {
+  font-size: 18px;
   color: var(--text-gray);
-  transition: color 0.3s;
+  margin-bottom: 32px;
+  letter-spacing: 0.5px;
 }
 
-.contact-email:hover { color: var(--text-white); }
+.contact-phone-number {
+  display: block;
+  font-family: var(--font-display, 'Anton', sans-serif);
+  font-size: clamp(32px, 5vw, 56px);
+  color: var(--text-white);
+  text-decoration: none;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  transition: color 0.3s, text-shadow 0.3s;
+}
 
-.form-status {
-  text-align: center;
+.contact-phone-number:hover {
+  color: var(--accent-violet, #8b5cf6);
+  text-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+}
+
+.contact-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-contact-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
   font-size: 14px;
-  margin-top: 8px;
-  min-height: 20px;
 }
 
-.form-status.success { color: #4ade80; }
-.form-status.error { color: var(--accent-pink); }
+.btn-whatsapp {
+  --accent-violet: #25D366;
+  border-color: rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp::before {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+}
+
+.btn-whatsapp:hover {
+  border-color: rgba(37, 211, 102, 0.6);
+  box-shadow: 0 0 30px rgba(37, 211, 102, 0.15);
+}
 
 /* ===== FOOTER ===== */
 .footer {

@@ -623,7 +623,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursorTracking();
   initI18n();
   initScrollReveal();
-  initContactForm();
 
   function revealSite() {
     const loader = document.getElementById('loaderOverlay');
@@ -907,43 +906,3 @@ window.setLanguage = function (lang) {
   document.dispatchEvent(new CustomEvent('languageChange', { detail: { lang } }));
 };
 
-// ===== CONTACT FORM =====
-function initContactForm() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const status = document.getElementById('formStatus');
-    const btn = form.querySelector('button[type="submit"]');
-    const lang = getCurrentLang();
-    const t = translationData[lang] || translationData['ro'];
-
-    btn.disabled = true;
-    btn.style.opacity = '0.5';
-    status.textContent = '';
-    status.className = 'form-status';
-
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString()
-      });
-
-      if (res.ok) {
-        status.textContent = t['contact.success'] || 'Sent!';
-        status.classList.add('success');
-        form.reset();
-      } else {
-        throw new Error('Not ok');
-      }
-    } catch {
-      status.textContent = t['contact.error'] || 'Error';
-      status.classList.add('error');
-    }
-
-    btn.disabled = false;
-    btn.style.opacity = '1';
-  });
-}
