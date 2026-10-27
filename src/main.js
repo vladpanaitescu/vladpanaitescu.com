@@ -161,6 +161,121 @@ const projects = [
     ]
   },
   {
+    "id": "bgs-fleet-refresh",
+    "title": "BGS Grup – Fleet Refresh",
+    "cover": "/Images/covers/bgs-fleet-refresh.png",
+    "tags": [
+      "Fleet Refresh",
+      "Branding",
+      "Visual Identity"
+    ],
+    "behanceUrl": "https://www.behance.net/gallery/257678227/BGS-Grup-Fleet-Refresh",
+    "content": [
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-fleet-refresh/image_1.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-fleet-refresh/image_2.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-fleet-refresh/image_3.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-fleet-refresh/image_4.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-fleet-refresh/image_5.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-fleet-refresh/image_6.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-fleet-refresh/image_7.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-fleet-refresh/image_8.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-fleet-refresh/image_9.png"
+      }
+    ]
+  },
+  {
+    "id": "bgs-kids",
+    "title": "BGS Kids – Festival Activation",
+    "cover": "/Images/covers/bgs-kids.png",
+    "tags": [
+      "Brand Activation",
+      "Event Design",
+      "Illustration"
+    ],
+    "behanceUrl": "https://www.behance.net/gallery/257681423/BGS-Kids-Festival-Activation",
+    "content": [
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-kids/image_1.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-kids/image_2.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-kids/image_3.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-kids/image_4.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-kids/image_5.png"
+      },
+      {
+        "type": "image",
+        "src": "/Images/projects/bgs-kids/image_6.png"
+      }
+    ]
+  },
+  {
+    "id": "bgs-ooh",
+    "title": "BGS Grup – OOH Digital Advertising",
+    "cover": "/Images/covers/bgs-ooh.png",
+    "tags": [
+      "Digital Advertising",
+      "OOH Campaign",
+      "Motion Design"
+    ],
+    "behanceUrl": "https://www.behance.net/gallery/257679639/BGS-Grup-OOH-Digital-Advertising",
+    "content": [
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/QGYchaZ_9ff/embed?api_key=behance1&bgcolor=%23191919"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/LbBuN7D2ES2/embed?api_key=behance1&bgcolor=%23191919"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/IGKPgiwCMCp/embed?api_key=behance1&bgcolor=%23191919"
+      },
+      {
+        "type": "video",
+        "src": "https://www-ccv.adobe.io/v1/player/ccv/28xwA9jctns/embed?api_key=behance1&bgcolor=%23191919"
+      }
+    ]
+  },
+  {
     "id": "bgs-grup",
     "title": "BGS Grup – National Campaign Visual Development",
     "cover": "/Images/covers/bgs-grup.jpg",
@@ -561,46 +676,6 @@ const projects = [
       {
         "type": "image",
         "src": "/Images/projects/huawei/image_5.png"
-      }
-    ]
-  },
-  {
-    "id": "game-design-numbers",
-    "title": "Mobile Game Design - Numbers",
-    "cover": "/Images/covers/game-design-numbers.png",
-    "tags": [
-      "Mobile Game Design",
-      "UI/UX",
-      "Visual Development"
-    ],
-    "behanceUrl": "https://www.behance.net/gallery/175697587/Mobile-Game-Design-Numbers",
-    "content": [
-      {
-        "type": "text",
-        "html": "<div>For this freelance project, I was asked to do a whole redesign for this game called Numbers. Me and the client&nbsp;embarked on an exciting project, crafting a unique game that fuses calculus methods to calculate seven numbers into one target. Inspired by the elegance of hexagons and the brilliance of the brain, we designed captivating icons that would immerse players in a visually stunning and intellectually stimulating environment. The fusion of aesthetics and functionality drove every design decision.<br></div>",
-        "align": "center"
-      },
-      {
-        "type": "image",
-        "src": "/Images/projects/game-design-numbers/image_1.png"
-      },
-      {
-        "type": "text",
-        "html": "<div>Objective: Develop an engaging mobile game that combines mathematical challenges with interactive gameplay.</div><div>Role: Visual design, user interface development, user experience enhancement.</div><div>Tools: Adobe XD, Adobe Illustrator, Adobe Photoshop.</div>",
-        "align": "center"
-      },
-      {
-        "type": "image",
-        "src": "/Images/projects/game-design-numbers/image_2.png"
-      },
-      {
-        "type": "image",
-        "src": "/Images/projects/game-design-numbers/image_3.png"
-      },
-      {
-        "type": "text",
-        "html": "<div>The mobile game successfully merges educational content with entertaining gameplay, catering to both casual gamers and those seeking mental stimulation. By providing an engaging and intellectually stimulating experience, the game has the potential to captivate a diverse audience.<br></div>",
-        "align": "center"
       }
     ]
   }
