@@ -681,10 +681,75 @@ const projects = [
   }
 ];
 
+// ===== TRANSLATION & UTILS =====
+function t(key, fallback = '') {
+  const lang = getCurrentLang();
+  return (translationData[lang] && translationData[lang][key]) || fallback;
+}
+
+function showToast(message) {
+  let toast = document.getElementById('vpToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'vpToast';
+    toast.className = 'vp-toast';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span>${message}</span>
+  `;
+  toast.classList.add('show');
+  clearTimeout(toast._timeout);
+  toast._timeout = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
+}
+
+function copyProjectLink(projectId, btn) {
+  const url = `${window.location.origin}/#project/${projectId}`;
+  const onSuccess = () => {
+    if (btn) {
+      btn.classList.add('copied');
+      const textSpan = btn.querySelector('.share-text');
+      const origText = textSpan ? textSpan.textContent : '';
+      if (textSpan) textSpan.textContent = t('project.copied', 'Link copiat!');
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        if (textSpan) textSpan.textContent = origText;
+      }, 2200);
+    }
+    showToast(t('project.copied', 'Link copiat!'));
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(onSuccess).catch(() => fallbackCopy(url, onSuccess));
+  } else {
+    fallbackCopy(url, onSuccess);
+  }
+}
+
+function fallbackCopy(text, cb) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    if (cb) cb();
+  } catch (e) {
+    console.error('Copy failed', e);
+  }
+  document.body.removeChild(ta);
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
   history.scrollRestoration = 'manual';
-  if (window.location.hash) history.replaceState(null, '', window.location.pathname);
   window.scrollTo(0, 0);
 
   const hero = document.querySelector('.hero');
@@ -722,7 +787,13 @@ function initProjectsGrid() {
   if (!grid) return;
 
   grid.innerHTML = projects.map((p, i) => `
-    <div class="project-grid-card reveal" data-project-index="${i}">
+    <div class="project-grid-card reveal" data-project-index="${i}" data-project-id="${p.id}">
+      <button class="card-share-btn" data-share-id="${p.id}" title="${t('project.copy_link', 'Copiază link')}" aria-label="Share">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+        </svg>
+      </button>
       <img class="project-grid-card-cover" src="${p.cover}?v=2" alt="${p.title}" loading="${i < 4 ? 'eager' : 'lazy'}" />
       <div class="project-grid-card-info">
         <div class="project-grid-card-title">${p.title}</div>
@@ -730,6 +801,14 @@ function initProjectsGrid() {
       </div>
     </div>
   `).join('');
+
+  grid.querySelectorAll('.card-share-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const projId = btn.getAttribute('data-share-id');
+      copyProjectLink(projId, btn);
+    });
+  });
 }
 
 // ===== PROJECT OVERLAY =====
@@ -747,17 +826,28 @@ function initProjectOverlay() {
   document.addEventListener('click', (e) => {
     const card = e.target.closest('.project-grid-card');
     if (!card) return;
+    if (e.target.closest('.card-share-btn')) return; // handled by share button
     const index = parseInt(card.dataset.projectIndex, 10);
-    openProject(projects[index]);
+    openProject(projects[index], true);
   });
 
-  function openProject(project) {
+  function openProject(project, updateHistory = true) {
+    if (!project) return;
     let html = '';
 
-    // Header
+    // Header with Title + Share Button
     html += `
       <div class="project-detail-header">
-        <h2 class="project-detail-title">${project.title}</h2>
+        <div class="project-detail-header-top">
+          <h2 class="project-detail-title">${project.title}</h2>
+          <button class="project-share-btn" id="projectShareBtn" data-project-id="${project.id}" title="${t('project.copy_link', 'Copiază link')}">
+            <svg class="share-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <span class="share-text" data-i18n="project.copy_link">${t('project.copy_link', 'Copiază link')}</span>
+          </button>
+        </div>
         <div class="project-detail-meta">
           ${project.tags.map(t => `<span class="project-detail-tag">${t}</span>`).join('')}
         </div>
@@ -790,15 +880,24 @@ function initProjectOverlay() {
     });
     html += '</div>';
 
-    // Behance link
+    // Bottom actions: Share Button + Behance link
     html += `
-      <div class="project-detail-behance">
-        <a href="${project.behanceUrl}" target="_blank" rel="noopener">
-          <svg width="20" height="20" viewBox="0 0 576 512" fill="currentColor">
-            <path d="M232 237.2c31.8-15.2 48.4-38.2 48.4-74 0-70.6-52.6-87.8-113.3-87.8H0v354.4h171.8c64.4 0 124.9-30.9 124.9-102.9 0-44.5-21.1-77.4-64.7-89.7zM77.9 135.9H151c28.1 0 53.4 7.9 53.4 40.5 0 30.1-19.7 42.2-47.5 42.2h-79v-82.7zm83.3 233.7H77.9V272h84.9c34.3 0 56 14.3 56 50.6 0 35.8-25.9 47-57.6 47zm358.5-240.7H376V94h143.7v34.9zM576 305.2c0-75.9-44.4-134.2-124.3-134.2-78.8 0-132.3 55.4-132.3 134.2 0 82.2 53.6 132.3 132.3 132.3 49.4 0 97.2-19.9 120.1-63.6l-58.2-30.4c-10.5 21.3-31.3 36.5-61.9 36.5-38.2 0-64.1-21.1-69.5-63.6h199c.3-4.7.8-11.9.8-11.2zm-198-20.7c3.7-29.5 26.4-56.4 65.8-56.4 36.4 0 57.5 22.7 63.2 56.4H378z"/>
+      <div class="project-detail-bottom-actions">
+        <button class="project-share-btn project-share-btn-secondary" id="projectShareBtnBottom" data-project-id="${project.id}" title="${t('project.copy_link', 'Copiază link')}">
+          <svg class="share-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
           </svg>
-          View on Behance
-        </a>
+          <span class="share-text" data-i18n="project.copy_link">${t('project.copy_link', 'Copiază link')}</span>
+        </button>
+        <div class="project-detail-behance">
+          <a href="${project.behanceUrl}" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 576 512" fill="currentColor">
+              <path d="M232 237.2c31.8-15.2 48.4-38.2 48.4-74 0-70.6-52.6-87.8-113.3-87.8H0v354.4h171.8c64.4 0 124.9-30.9 124.9-102.9 0-44.5-21.1-77.4-64.7-89.7zM77.9 135.9H151c28.1 0 53.4 7.9 53.4 40.5 0 30.1-19.7 42.2-47.5 42.2h-79v-82.7zm83.3 233.7H77.9V272h84.9c34.3 0 56 14.3 56 50.6 0 35.8-25.9 47-57.6 47zm358.5-240.7H376V94h143.7v34.9zM576 305.2c0-75.9-44.4-134.2-124.3-134.2-78.8 0-132.3 55.4-132.3 134.2 0 82.2 53.6 132.3 132.3 132.3 49.4 0 97.2-19.9 120.1-63.6l-58.2-30.4c-10.5 21.3-31.3 36.5-61.9 36.5-38.2 0-64.1-21.1-69.5-63.6h199c.3-4.7.8-11.9.8-11.2zm-198-20.7c3.7-29.5 26.4-56.4 65.8-56.4 36.4 0 57.5 22.7 63.2 56.4H378z"/>
+            </svg>
+            <span data-i18n="project.view_behance">${t('project.view_behance', 'Vezi pe Behance')}</span>
+          </a>
+        </div>
       </div>
     `;
 
@@ -807,18 +906,35 @@ function initProjectOverlay() {
     overlay.classList.add('open');
     document.body.classList.add('overlay-open');
 
+    // Attach share button listeners inside modal
+    const topBtn = content.querySelector('#projectShareBtn');
+    if (topBtn) topBtn.addEventListener('click', () => copyProjectLink(project.id, topBtn));
+    const botBtn = content.querySelector('#projectShareBtnBottom');
+    if (botBtn) botBtn.addEventListener('click', () => copyProjectLink(project.id, botBtn));
+
+    // Update History & Document Title
+    if (updateHistory) {
+      history.pushState({ projectId: project.id }, '', `#project/${project.id}`);
+    }
+    document.title = `${project.title} — Vlad Panaitescu`;
+
     // Delay lazy loader initialization slightly to let the modal layout settle and transition to visible.
     setTimeout(bindLazyMediaLoader, 150);
   }
 
-  function closeProject() {
+  function closeProject(updateHistory = true) {
     if (modalObserver) {
       modalObserver.disconnect();
       modalObserver = null;
     }
     overlay.classList.remove('open');
     document.body.classList.remove('overlay-open');
-    
+
+    if (updateHistory && window.location.hash.startsWith('#project/')) {
+      history.pushState(null, '', window.location.pathname + window.location.search);
+    }
+    document.title = 'Vlad Panaitescu | Official Website';
+
     // Clear heavy DOM only after the modal transition finishes to ensure a smooth, premium exit fade-out
     setTimeout(() => {
       if (!overlay.classList.contains('open')) {
@@ -826,6 +942,48 @@ function initProjectOverlay() {
       }
     }, 450);
   }
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', () => {
+    const hash = window.location.hash;
+    if (hash.startsWith('#project/')) {
+      const id = hash.replace('#project/', '').trim();
+      const proj = projects.find(p => p.id === id);
+      if (proj) openProject(proj, false);
+    } else if (overlay.classList.contains('open')) {
+      closeProject(false);
+    }
+  });
+
+  // Check URL on load for deep linking
+  function checkUrlForProject() {
+    const hash = window.location.hash;
+    const search = new URLSearchParams(window.location.search);
+    let targetId = search.get('project');
+
+    if (!targetId && hash) {
+      if (hash.startsWith('#project/')) {
+        targetId = hash.replace('#project/', '').trim();
+      } else if (hash.startsWith('#/project/')) {
+        targetId = hash.replace('#/project/', '').trim();
+      } else if (hash.length > 1 && !['#projects', '#contact', '#about'].includes(hash)) {
+        const cleanHash = hash.replace('#', '').trim();
+        if (projects.some(p => p.id === cleanHash)) {
+          targetId = cleanHash;
+        }
+      }
+    }
+
+    if (targetId) {
+      const proj = projects.find(p => p.id === targetId);
+      if (proj) {
+        openProject(proj, false);
+      }
+    }
+  }
+
+  // Run deep link check
+  checkUrlForProject();
 
   function bindLazyMediaLoader() {
     const lazyItems = container.querySelectorAll('.lazy-media-item');

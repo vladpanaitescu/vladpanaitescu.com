@@ -35,7 +35,10 @@ const translationData = {
     'carspotting.description': 'the biggest car enthusiast community',
     'carspotting.stats_title': 'IMPACTUL COMUNITĂȚII',
     'carspotting.stats_subtitle': 'Peste jumătate de milion de pasionați auto uniți pe toate platformele noastre.',
-    'carspotting.total_followers': 'Total Urmăritori'
+    'carspotting.total_followers': 'Total Urmăritori',
+    'project.copy_link': 'Copiază link',
+    'project.copied': 'Link copiat!',
+    'project.view_behance': 'Vezi pe Behance'
   },
   en: {
     'nav.projects': 'PROJECTS',
@@ -70,7 +73,10 @@ const translationData = {
     'carspotting.description': 'the biggest car enthusiast community',
     'carspotting.stats_title': 'COMMUNITY IMPACT',
     'carspotting.stats_subtitle': 'Over half a million car enthusiasts united across all our platforms.',
-    'carspotting.total_followers': 'Total Followers'
+    'carspotting.total_followers': 'Total Followers',
+    'project.copy_link': 'Copy link',
+    'project.copied': 'Link copied!',
+    'project.view_behance': 'View on Behance'
   },
   de: {
     'nav.projects': 'PROJEKTE',
@@ -105,7 +111,10 @@ const translationData = {
     'carspotting.description': 'the biggest car enthusiast community',
     'carspotting.stats_title': 'GEMEINSCHAFTS-IMPACT',
     'carspotting.stats_subtitle': 'Über eine halbe Million Autobegeisterte auf allen unseren Plattformen vereint.',
-    'carspotting.total_followers': 'Follower Gesamt'
+    'carspotting.total_followers': 'Follower Gesamt',
+    'project.copy_link': 'Link kopieren',
+    'project.copied': 'Link kopiert!',
+    'project.view_behance': 'Auf Behance ansehen'
   },
   it: {
     'nav.projects': 'PROGETTI',
@@ -140,7 +149,10 @@ const translationData = {
     'carspotting.description': 'the biggest car enthusiast community',
     'carspotting.stats_title': 'IMPATTO DELLA COMUNITÀ',
     'carspotting.stats_subtitle': 'Oltre mezzo milione di appassionati di auto uniti su tutte le nostre piattaforme.',
-    'carspotting.total_followers': 'Follower Totali'
+    'carspotting.total_followers': 'Follower Totali',
+    'project.copy_link': 'Copia link',
+    'project.copied': 'Link copiato!',
+    'project.view_behance': 'Vedi su Behance'
   },
   fr: {
     'nav.projects': 'PROJETS',
@@ -175,7 +187,10 @@ const translationData = {
     'carspotting.description': 'the biggest car enthusiast community',
     'carspotting.stats_title': 'IMPACT DE LA COMMUNAUTÉ',
     'carspotting.stats_subtitle': 'Plus d\'un demi-million de passionnés d\'automobile unis sur toutes nos plateformes.',
-    'carspotting.total_followers': 'Total Abonnés'
+    'carspotting.total_followers': 'Total Abonnés',
+    'project.copy_link': 'Copier le lien',
+    'project.copied': 'Lien copié !',
+    'project.view_behance': 'Voir sur Behance'
   }
 };
 
